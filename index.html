@@ -547,12 +547,23 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+const SUPABASE_URL = 'https://sihdfuuzrjuuhymivrdg.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpaGRmdXV6cmp1dWh5bWl2cmRnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI1MjI1NDUsImV4cCI6MjA4ODA5ODU0NX0.W6_JGD3qPn9jwPhm3_8b11uZvD5tHA7sh832bixSDT8';
+const { createClient } = supabase;
+const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
 // Scroll reveal
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Auto-open modal if redirected back from clinician portal
+if (new URLSearchParams(window.location.search).get('clinician') === 'login') {
+  window.addEventListener('DOMContentLoaded', () => openModal());
+}
 
 // Modal
 function openModal() {
@@ -562,6 +573,8 @@ function openModal() {
 function closeModal() {
   document.getElementById('clinicianModal').classList.remove('open');
   document.body.style.overflow = '';
+  clearError('form-error');
+  clearError('req-error');
 }
 function handleOverlayClick(e) {
   if (e.target === document.getElementById('clinicianModal')) closeModal();
@@ -575,7 +588,107 @@ function switchTab(tab) {
   document.getElementById('form-request').style.display = tab === 'request' ? 'flex' : 'none';
   document.getElementById('modal-subtitle').textContent = tab === 'login'
     ? 'Sign in to access your clinician dashboard, or request access to get started.'
-    : 'Tell us a bit about yourself and we\'ll set you up within 48 hours.';
+    : "Tell us a bit about yourself and we'll set you up within 48 hours.";
+}
+
+function showError(id, msg) {
+  let el = document.getElementById(id);
+  if (!el) {
+    el = document.createElement('div');
+    el.id = id;
+    el.style.cssText = 'background:rgba(196,112,96,0.1);border:1px solid rgba(196,112,96,0.3);border-radius:8px;padding:10px 14px;font-size:12px;color:#C47060;margin-bottom:4px;';
+    const form = id === 'form-error'
+      ? document.getElementById('form-login')
+      : document.getElementById('form-request');
+    const btn = form.querySelector('.form-btn');
+    form.insertBefore(el, btn);
+  }
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+
+function clearError(id) {
+  const el = document.getElementById(id);
+  if (el) el.style.display = 'none';
+}
+
+// Sign in
+async function handleSignIn(e) {
+  e.preventDefault();
+  clearError('form-error');
+  const btn = e.target.querySelector('.form-btn');
+  const email = document.getElementById('login-email').value.trim();
+  const password = document.getElementById('login-password').value;
+  if (!email || !password) { showError('form-error', 'Please enter your email and password.'); return; }
+  btn.disabled = true; btn.textContent = 'Signing in...';
+  const { error } = await sb.auth.signInWithPassword({ email, password });
+  btn.disabled = false; btn.textContent = 'Sign in →';
+  if (error) {
+    showError('form-error', error.message.includes('Invalid') ? 'Incorrect email or password.' : error.message);
+    return;
+  }
+  window.location.href = '/clinician.html';
+}
+
+// Request access — two-step: signUp then insert into clinicians
+async function handleRequestAccess(e) {
+  e.preventDefault();
+  clearError('req-error');
+  const btn = e.target.querySelector('.form-btn');
+  const name = document.getElementById('req-name').value.trim();
+  const email = document.getElementById('req-email').value.trim();
+  const role = document.getElementById('req-role').value;
+  const practice = document.getElementById('req-practice').value.trim();
+  if (!name || !email || !role || !practice) {
+    showError('req-error', 'Please fill in all fields.');
+    return;
+  }
+  btn.disabled = true; btn.textContent = 'Submitting...';
+
+  // Step 1 — create auth account
+  const tempPassword = crypto.randomUUID().slice(0, 16) + 'Aa1!';
+  const { data: signUpData, error: signUpError } = await sb.auth.signUp({ email, password: tempPassword });
+
+  if (signUpError && !signUpError.message.toLowerCase().includes('already')) {
+    btn.disabled = false; btn.textContent = 'Submit request →';
+    showError('req-error', signUpError.message);
+    return;
+  }
+
+  // Step 2 — get user id (handle both new signup and already-registered)
+  let userId = signUpData?.user?.id;
+
+  // If already registered, sign them in briefly to get their id
+  if (!userId) {
+    const { data: existing } = await sb.auth.signInWithPassword({ email, password: tempPassword });
+    userId = existing?.user?.id;
+  }
+
+  // Step 3 — insert into clinicians table using service call
+  if (userId) {
+    const { error: insertError } = await sb.from('clinicians').upsert({
+      user_id: userId,
+      name,
+      email,
+      role,
+      practice,
+      approved: false
+    }, { onConflict: 'user_id' });
+
+    if (insertError) {
+      console.error('Insert error:', insertError);
+    }
+  }
+
+  // Always show success (so we don't leak whether email exists)
+  btn.disabled = false;
+  document.getElementById('form-request').innerHTML = `
+    <div style="text-align:center;padding:24px 0;">
+      <div style="font-size:36px;margin-bottom:16px;">💚</div>
+      <div style="font-family:'Playfair Display',serif;font-size:18px;color:#1A2E38;margin-bottom:10px;">Request received.</div>
+      <div style="font-size:13px;color:#6A9AAA;line-height:1.7;">We will be in touch at <strong style="color:#1A2E38;">${email}</strong> within 48 hours.</div>
+    </div>
+  `;
 }
 </script>
 </body>
