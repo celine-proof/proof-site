@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>proof. — Reset password</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --bg:#F7F4EE; --dark:#1A2E38; --terra:#3A7A9A; --sage:#7AB8C8; --muted:#6A9AAA; --border:#D0E4EC; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--dark); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; -webkit-font-smoothing: antialiased; }
+.card { background: white; border-radius: 24px; padding: 44px 40px; width: 100%; max-width: 420px; box-shadow: 0 24px 60px rgba(26,46,56,0.1); }
+.logo { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--dark); margin-bottom: 4px; }
+.logo span { color: var(--terra); }
+.subtitle { font-size: 12px; color: var(--muted); margin-bottom: 32px; line-height: 1.5; }
+.form-group { display: flex; flex-direction: column; gap: 5px; margin-bottom: 14px; }
+.form-label { font-size: 11px; font-weight: 600; color: var(--dark); letter-spacing: 0.3px; }
+.form-input { border: 1px solid var(--border); border-radius: 10px; padding: 11px 14px; font-size: 13px; color: var(--dark); font-family: 'DM Sans', sans-serif; background: var(--bg); outline: none; transition: border-color 0.2s; }
+.form-input:focus { border-color: var(--terra); }
+.btn { background: var(--terra); color: white; border: none; border-radius: 10px; padding: 13px; font-size: 14px; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; width: 100%; margin-top: 4px; transition: background 0.2s; }
+.btn:hover { background: #2d6685; }
+.btn:disabled { opacity: 0.6; cursor: default; }
+.error { background: rgba(196,112,96,0.1); border: 1px solid rgba(196,112,96,0.3); border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #C47060; margin-bottom: 12px; display: none; }
+.success { text-align: center; padding: 20px 0; display: none; }
+.success-icon { font-size: 36px; margin-bottom: 16px; }
+.success-title { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--dark); margin-bottom: 8px; }
+.success-text { font-size: 13px; color: var(--muted); line-height: 1.6; }
+.back { display: block; text-align: center; margin-top: 20px; font-size: 12px; color: var(--muted); text-decoration: none; }
+.back:hover { color: var(--terra); }
+
+/* Request reset state (no token) */
+#request-state { display: block; }
+/* Set new password state (has token) */
+#reset-state { display: none; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="logo">proof<span>.</span></div>
+
+  <!-- REQUEST RESET (no token in URL) -->
+  <div id="request-state">
+    <div class="subtitle">Enter your email and we'll send you a reset link.</div>
+    <div class="error" id="req-error"></div>
+    <div class="success" id="req-success">
+      <div class="success-icon">✉️</div>
+      <div class="success-title">Check your inbox.</div>
+      <div class="success-text">We sent a password reset link to your email.</div>
+    </div>
+    <div id="req-form">
+      <div class="form-group">
+        <label class="form-label">Email address</label>
+        <input class="form-input" id="reset-email" type="email" placeholder="you@clinic.com" autocomplete="email">
+      </div>
+      <button class="btn" id="req-btn" onclick="sendResetEmail()">Send reset link →</button>
+    </div>
+    <a href="/" class="back">← Back to proofrecoveryapp.com</a>
+  </div>
+
+  <!-- SET NEW PASSWORD (token in URL) -->
+  <div id="reset-state">
+    <div class="subtitle">Choose a new password for your clinician account.</div>
+    <div class="error" id="new-error"></div>
+    <div class="success" id="new-success">
+      <div class="success-icon">✅</div>
+      <div class="success-title">Password updated.</div>
+      <div class="success-text">Redirecting you to the portal...</div>
+    </div>
+    <div id="new-form">
+      <div class="form-group">
+        <label class="form-label">New password</label>
+        <input class="form-input" id="new-password" type="password" placeholder="At least 8 characters" autocomplete="new-password">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Confirm password</label>
+        <input class="form-input" id="confirm-password" type="password" placeholder="Same as above" autocomplete="new-password">
+      </div>
+      <button class="btn" id="new-btn" onclick="updatePassword()">Set new password →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const SUPABASE_URL = 'https://sihdfuuzrjuuhymivrdg.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpaGRmdXV6cmp1dWh5bWl2cmRnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI1MjI1NDUsImV4cCI6MjA4ODA5ODU0NX0.W6_JGD3qPn9jwPhm3_8b11uZvD5tHA7sh832bixSDT8';
+const { createClient } = supabase;
+const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// Check if we have a reset token in the URL hash
+const hash = window.location.hash;
+const hasToken = hash.includes('access_token') || hash.includes('type=recovery');
+
+if (hasToken) {
+  document.getElementById('request-state').style.display = 'none';
+  document.getElementById('reset-state').style.display = 'block';
+}
+
+// Send reset email
+async function sendResetEmail() {
+  const email = document.getElementById('reset-email').value.trim();
+  const btn = document.getElementById('req-btn');
+  const errEl = document.getElementById('req-error');
+  errEl.style.display = 'none';
+
+  if (!email) { errEl.textContent = 'Please enter your email.'; errEl.style.display = 'block'; return; }
+
+  btn.disabled = true; btn.textContent = 'Sending...';
+
+  const { error } = await sb.auth.resetPasswordForEmail(email, {
+    redirectTo: 'https://proofrecoveryapp.com/reset.html'
+  });
+
+  btn.disabled = false; btn.textContent = 'Send reset link \u2192';
+
+  if (error) {
+    errEl.textContent = error.message;
+    errEl.style.display = 'block';
+    return;
+  }
+
+  // Always show success (don't leak whether email exists)
+  document.getElementById('req-form').style.display = 'none';
+  document.getElementById('req-success').style.display = 'block';
+}
+
+// Set new password
+async function updatePassword() {
+  const password = document.getElementById('new-password').value;
+  const confirm = document.getElementById('confirm-password').value;
+  const btn = document.getElementById('new-btn');
+  const errEl = document.getElementById('new-error');
+  errEl.style.display = 'none';
+
+  if (!password || password.length < 8) {
+    errEl.textContent = 'Password must be at least 8 characters.';
+    errEl.style.display = 'block'; return;
+  }
+  if (password !== confirm) {
+    errEl.textContent = 'Passwords do not match.';
+    errEl.style.display = 'block'; return;
+  }
+
+  btn.disabled = true; btn.textContent = 'Updating...';
+
+  const { error } = await sb.auth.updateUser({ password });
+
+  if (error) {
+    btn.disabled = false; btn.textContent = 'Set new password \u2192';
+    errEl.textContent = error.message;
+    errEl.style.display = 'block'; return;
+  }
+
+  document.getElementById('new-form').style.display = 'none';
+  document.getElementById('new-success').style.display = 'block';
+  setTimeout(() => { window.location.href = '/clinician.html'; }, 2000);
+}
+</script>
+</body>
+</html>

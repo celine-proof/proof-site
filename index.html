@@ -512,7 +512,7 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
         <input class="form-input" id="login-password" type="password" placeholder="••••••••" autocomplete="current-password" required>
       </div>
       <button class="form-btn" type="submit">Sign in →</button>
-      <div class="form-footer"><a href="#">Forgot password?</a></div>
+      <div class="form-footer"><a href="/reset.html">Forgot password?</a></div>
     </form>
 
     <!-- REQUEST FORM -->
@@ -630,7 +630,7 @@ async function handleSignIn(e) {
   window.location.href = '/clinician.html';
 }
 
-// Request access — two-step: signUp then insert into clinicians
+// Request access — inserts into clinician_requests (anonymous, no auth needed)
 async function handleRequestAccess(e) {
   e.preventDefault();
   clearError('req-error');
@@ -645,46 +645,17 @@ async function handleRequestAccess(e) {
   }
   btn.disabled = true; btn.textContent = 'Submitting...';
 
-  // Step 1 — create auth account
-  const tempPassword = crypto.randomUUID().slice(0, 16) + 'Aa1!';
-  const { data: signUpData, error: signUpError } = await sb.auth.signUp({ email, password: tempPassword });
+  const { error } = await sb.from('clinician_requests').insert({ name, email, role, practice });
 
-  if (signUpError && !signUpError.message.toLowerCase().includes('already')) {
-    btn.disabled = false; btn.textContent = 'Submit request →';
-    showError('req-error', signUpError.message);
-    return;
+  if (error) {
+    console.error('Request error:', error.message);
   }
 
-  // Step 2 — get user id (handle both new signup and already-registered)
-  let userId = signUpData?.user?.id;
-
-  // If already registered, sign them in briefly to get their id
-  if (!userId) {
-    const { data: existing } = await sb.auth.signInWithPassword({ email, password: tempPassword });
-    userId = existing?.user?.id;
-  }
-
-  // Step 3 — insert into clinicians table using service call
-  if (userId) {
-    const { error: insertError } = await sb.from('clinicians').upsert({
-      user_id: userId,
-      name,
-      email,
-      role,
-      practice,
-      approved: false
-    }, { onConflict: 'user_id' });
-
-    if (insertError) {
-      console.error('Insert error:', insertError);
-    }
-  }
-
-  // Always show success (so we don't leak whether email exists)
+  // Always show success regardless
   btn.disabled = false;
   document.getElementById('form-request').innerHTML = `
     <div style="text-align:center;padding:24px 0;">
-      <div style="font-size:36px;margin-bottom:16px;">💚</div>
+      <div style="font-size:36px;margin-bottom:16px;">&#x1F49A;</div>
       <div style="font-family:'Playfair Display',serif;font-size:18px;color:#1A2E38;margin-bottom:10px;">Request received.</div>
       <div style="font-size:13px;color:#6A9AAA;line-height:1.7;">We will be in touch at <strong style="color:#1A2E38;">${email}</strong> within 48 hours.</div>
     </div>
