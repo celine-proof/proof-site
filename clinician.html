@@ -307,8 +307,9 @@ async function init() {
     .single();
 
   if (error || !clinician) {
-    // Logged in but not a registered clinician
-    window.location.href = '/?clinician=login';
+    // Logged in but not yet in clinicians table — show pending state
+    document.getElementById('loading').style.display = 'none';
+    showPendingState(session.user.email);
     return;
   }
 
@@ -341,9 +342,10 @@ function showPendingState(email) {
     <div style="max-width:480px;text-align:center;">
       <div style="font-family:'Playfair Display',serif;font-size:28px;color:var(--dark);margin-bottom:4px;">proof<span style="color:var(--terra)">.</span></div>
       <div style="font-size:13px;color:var(--muted);margin-bottom:40px;">Clinician portal</div>
-      <div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--dark);margin-bottom:12px;">Your request is under review.</div>
+      <div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--dark);margin-bottom:12px;">Access pending.</div>
       <p style="font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:24px;">
-        We received your request for ${email}. We'll be in touch within 48 hours to confirm access.
+        Your account has been created for <strong>${email}</strong>.<br><br>
+        We're reviewing your request and will confirm access within 48 hours. You'll be able to sign back in once approved.<br><br>
         Questions? <a href="mailto:celine@proofrecoveryapp.com" style="color:var(--terra);">celine@proofrecoveryapp.com</a>
       </p>
       <button onclick="signOut()" style="background:var(--dark);color:white;border:none;padding:12px 28px;border-radius:12px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;">Sign out</button>
