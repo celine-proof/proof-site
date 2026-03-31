@@ -392,10 +392,6 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
       </div>
     </div>
     <div class="reveal">
-      <div class="sci-quote">
-        <blockquote>"Distress rises and — for most people, most of the time — it falls. Patients rarely believe this until they've seen their own data say it."</blockquote>
-        <cite>The principle behind every distress log in proof.</cite>
-      </div>
       <div class="sci-disclaimer" style="margin-top: 20px;">
         <div class="sci-disclaimer-label">Medical disclaimer</div>
         <div class="sci-disclaimer-text">proof. is a supportive tool for use alongside professional treatment. It is not a medical device, does not provide clinical care, and is not a replacement for a licensed provider. All users agree to terms of use on first launch.</div>
@@ -404,16 +400,7 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
   </div>
 </section>
 
-<!-- TESTIMONIAL -->
-<section class="testimonial">
-  <div class="testimonial-inner reveal">
-    <span class="quote-mark">"</span>
-    <blockquote>
-      "The hardest part of ERP is convincing patients that distress will fall if they don't act on it. proof. lets them see it <em>happen</em> — in their own data, in their own words."
-    </blockquote>
-    <cite>On the core mechanism behind proof.</cite>
-  </div>
-</section>
+
 
 <!-- FREE -->
 <section id="free">
@@ -450,7 +437,6 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
         <div class="cost-amount">$0</div>
         <div class="cost-label">for patients. Forever.</div>
         <div class="cost-divider"></div>
-        <div class="cost-note">"Recovery is hard enough without a paywall. Every feature in proof. is available to every patient from day one — no upgrades, no trials, no exceptions."</div>
         <a href="#" class="btn-light">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
           Download free on iOS
@@ -471,7 +457,7 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
         Download on iOS — Free
       </a>
-      <a href="mailto:celine@proofrecoveryapp.com" class="btn-outline">Get in touch</a>
+      <a href="/cdn-cgi/l/email-protection#84e7e1e8edeae1c4f4f6ebebe2f6e1e7ebf2e1f6fde5f4f4aae7ebe9" class="btn-outline">Get in touch</a>
     </div>
     <p class="cta-note reveal">Used alongside treatment, never instead of it. Always free for patients.</p>
   </div>
@@ -481,10 +467,10 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
 <footer>
   <div class="footer-logo">proof<span>.</span></div>
   <div class="footer-links">
-   <a href="/privacy.html">Privacy Policy</a>
-<a href="/terms.html">Terms of Use</a>
-<a href="/disclaimer.html">Medical Disclaimer</a>
-    <a href="mailto:celine@proofrecoveryapp.com">Contact</a>
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms of Use</a>
+    <a href="#">Medical Disclaimer</a>
+    <a href="/cdn-cgi/l/email-protection#b0d3d5dcd9ded5f0c0c2dfdfd6c2d5d3dfc6d5c2c9d1c0c09ed3dfdd">Contact</a>
   </div>
   <div class="footer-copy">© 2026 Proof Health Technologies LLC · Boston, MA</div>
 </footer>
@@ -502,32 +488,32 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
     </div>
 
     <!-- LOGIN FORM -->
-    <form class="modal-form" id="form-login" onsubmit="handleSignIn(event)">
+    <div class="modal-form" id="form-login">
       <div class="form-group">
         <label class="form-label">Email address</label>
-        <input class="form-input" id="login-email" type="email" placeholder="you@clinic.com" autocomplete="email" required>
+        <input class="form-input" type="email" placeholder="you@clinic.com">
       </div>
       <div class="form-group">
         <label class="form-label">Password</label>
-        <input class="form-input" id="login-password" type="password" placeholder="••••••••" autocomplete="current-password" required>
+        <input class="form-input" type="password" placeholder="••••••••">
       </div>
-      <button class="form-btn" type="submit">Sign in →</button>
-      <div class="form-footer"><a href="/reset.html">Forgot password?</a></div>
-    </form>
+      <button class="form-btn">Sign in →</button>
+      <div class="form-footer"><a href="#">Forgot password?</a></div>
+    </div>
 
     <!-- REQUEST FORM -->
-    <form class="modal-form" id="form-request" style="display:none;" onsubmit="handleRequestAccess(event)">
+    <div class="modal-form" id="form-request" style="display:none;">
       <div class="form-group">
         <label class="form-label">Full name</label>
-        <input class="form-input" id="req-name" type="text" placeholder="Dr. Jane Smith" required>
+        <input class="form-input" type="text" placeholder="Dr. Jane Smith">
       </div>
       <div class="form-group">
         <label class="form-label">Email address</label>
-        <input class="form-input" id="req-email" type="email" placeholder="you@clinic.com" required>
+        <input class="form-input" type="email" placeholder="you@clinic.com">
       </div>
       <div class="form-group">
         <label class="form-label">Role</label>
-        <select class="form-select form-input" id="req-role" required>
+        <select class="form-select form-input">
           <option value="" disabled selected>Select your role</option>
           <option>Therapist / Psychologist</option>
           <option>Psychiatrist</option>
@@ -539,32 +525,20 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
       </div>
       <div class="form-group">
         <label class="form-label">Practice or institution</label>
-        <input class="form-input" id="req-practice" type="text" placeholder="e.g. Private practice, Hospital name" required>
+        <input class="form-input" type="text" placeholder="e.g. Private practice, Hospital name">
       </div>
-      <button class="form-btn" type="submit" style="background:var(--terra);">Submit request →</button>
-      <div class="form-footer">We will be in touch within 48 hours.</div>
-    </form>
+      <button class="form-btn" style="background:var(--terra);">Submit request →</button>
+      <div class="form-footer">We'll be in touch within 48 hours.</div>
+    </div>
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-const SUPABASE_URL = 'https://sihdfuuzrjuuhymivrdg.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpaGRmdXV6cmp1dWh5bWl2cmRnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI1MjI1NDUsImV4cCI6MjA4ODA5ODU0NX0.W6_JGD3qPn9jwPhm3_8b11uZvD5tHA7sh832bixSDT8';
-const { createClient } = supabase;
-const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // Scroll reveal
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-// Auto-open modal if redirected back from clinician portal
-if (new URLSearchParams(window.location.search).get('clinician') === 'login') {
-  // DOMContentLoaded already fired — call directly
-  setTimeout(() => openModal(), 100);
-}
 
 // Modal
 function openModal() {
@@ -574,8 +548,6 @@ function openModal() {
 function closeModal() {
   document.getElementById('clinicianModal').classList.remove('open');
   document.body.style.overflow = '';
-  clearError('form-error');
-  clearError('req-error');
 }
 function handleOverlayClick(e) {
   if (e.target === document.getElementById('clinicianModal')) closeModal();
@@ -587,81 +559,4 @@ function switchTab(tab) {
   document.getElementById('tab-request').classList.toggle('active', tab === 'request');
   document.getElementById('form-login').style.display = tab === 'login' ? 'flex' : 'none';
   document.getElementById('form-request').style.display = tab === 'request' ? 'flex' : 'none';
-  document.getElementById('modal-subtitle').textContent = tab === 'login'
-    ? 'Sign in to access your clinician dashboard, or request access to get started.'
-    : "Tell us a bit about yourself and we'll set you up within 48 hours.";
-}
-
-function showError(id, msg) {
-  let el = document.getElementById(id);
-  if (!el) {
-    el = document.createElement('div');
-    el.id = id;
-    el.style.cssText = 'background:rgba(196,112,96,0.1);border:1px solid rgba(196,112,96,0.3);border-radius:8px;padding:10px 14px;font-size:12px;color:#C47060;margin-bottom:4px;';
-    const form = id === 'form-error'
-      ? document.getElementById('form-login')
-      : document.getElementById('form-request');
-    const btn = form.querySelector('.form-btn');
-    form.insertBefore(el, btn);
-  }
-  el.textContent = msg;
-  el.style.display = 'block';
-}
-
-function clearError(id) {
-  const el = document.getElementById(id);
-  if (el) el.style.display = 'none';
-}
-
-// Sign in
-async function handleSignIn(e) {
-  e.preventDefault();
-  clearError('form-error');
-  const btn = e.target.querySelector('.form-btn');
-  const email = document.getElementById('login-email').value.trim();
-  const password = document.getElementById('login-password').value;
-  if (!email || !password) { showError('form-error', 'Please enter your email and password.'); return; }
-  btn.disabled = true; btn.textContent = 'Signing in...';
-  const { error } = await sb.auth.signInWithPassword({ email, password });
-  btn.disabled = false; btn.textContent = 'Sign in →';
-  if (error) {
-    showError('form-error', error.message.includes('Invalid') ? 'Incorrect email or password.' : error.message);
-    return;
-  }
-  window.location.href = '/clinician.html';
-}
-
-// Request access — inserts into clinician_requests (anonymous, no auth needed)
-async function handleRequestAccess(e) {
-  e.preventDefault();
-  clearError('req-error');
-  const btn = e.target.querySelector('.form-btn');
-  const name = document.getElementById('req-name').value.trim();
-  const email = document.getElementById('req-email').value.trim();
-  const role = document.getElementById('req-role').value;
-  const practice = document.getElementById('req-practice').value.trim();
-  if (!name || !email || !role || !practice) {
-    showError('req-error', 'Please fill in all fields.');
-    return;
-  }
-  btn.disabled = true; btn.textContent = 'Submitting...';
-
-  const { error } = await sb.from('clinician_requests').insert({ name, email, role, practice });
-
-  if (error) {
-    console.error('Request error:', error.message);
-  }
-
-  // Always show success regardless
-  btn.disabled = false;
-  document.getElementById('form-request').innerHTML = `
-    <div style="text-align:center;padding:24px 0;">
-      <div style="font-size:36px;margin-bottom:16px;">&#x1F49A;</div>
-      <div style="font-family:'Playfair Display',serif;font-size:18px;color:#1A2E38;margin-bottom:10px;">Request received.</div>
-      <div style="font-size:13px;color:#6A9AAA;line-height:1.7;">We will be in touch at <strong style="color:#1A2E38;">${email}</strong> within 48 hours.</div>
-    </div>
-  `;
-}
-</script>
-</body>
-</html>
+  document.getElementById('modal-subtitle').textContent =
