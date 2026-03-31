@@ -16,20 +16,17 @@
 }
 body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--dark); -webkit-font-smoothing: antialiased; }
 
-/* Loading screen */
 #loading { position: fixed; inset: 0; background: var(--dark); display: flex; align-items: center; justify-content: center; z-index: 9999; }
 #loading .logo { font-family: 'Playfair Display', serif; font-size: 32px; color: white; }
 #loading .logo span { color: var(--sage); }
 
-/* Layout */
 #app { display: none; min-height: 100vh; }
 .layout { display: flex; min-height: 100vh; }
 
-/* Sidebar */
 .sidebar { width: 220px; background: var(--dark); display: flex; flex-direction: column; padding: 28px 16px; flex-shrink: 0; position: fixed; top: 0; left: 0; bottom: 0; }
 .sidebar-logo { font-family: 'Playfair Display', serif; font-size: 20px; color: white; margin-bottom: 8px; }
 .sidebar-logo span { color: var(--sage); }
-.sidebar-role { font-size: 11px; color: rgba(122,184,200,0.4); margin-bottom: 32px; }
+.sidebar-role { font-size: 11px; color: rgba(122,184,200,0.4); margin-bottom: 32px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .nav-item { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 10px; font-size: 13px; color: rgba(200,223,232,0.5); cursor: pointer; transition: all 0.15s; margin-bottom: 2px; text-decoration: none; }
 .nav-item:hover { background: rgba(122,184,200,0.08); color: rgba(200,223,232,0.8); }
 .nav-item.active { background: rgba(122,184,200,0.14); color: rgba(200,223,232,0.9); font-weight: 500; }
@@ -39,13 +36,11 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--d
 .sign-out { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 10px; font-size: 12px; color: rgba(200,223,232,0.3); cursor: pointer; border: none; background: none; font-family: 'DM Sans', sans-serif; transition: color 0.2s; }
 .sign-out:hover { color: rgba(200,223,232,0.6); }
 
-/* Main content */
 .main { margin-left: 220px; flex: 1; padding: 40px; }
 .page-header { margin-bottom: 32px; }
 .page-greeting { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--dark); margin-bottom: 4px; }
 .page-sub { font-size: 13px; color: var(--muted); }
 
-/* Stats row */
 .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
 .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; }
 .stat-card.alert { border-color: rgba(196,112,96,0.3); background: rgba(196,112,96,0.04); }
@@ -53,14 +48,13 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--d
 .stat-card.alert .stat-val { color: var(--red); }
 .stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; }
 
-/* Cards */
 .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 20px; }
 .card-title { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 16px; }
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 
-/* Patient list */
-.patient-row { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+.patient-row { display: flex; align-items: center; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.15s; border-radius: 8px; padding-left: 8px; padding-right: 8px; }
 .patient-row:last-child { border-bottom: none; }
+.patient-row:hover { background: rgba(122,184,200,0.05); }
 .avatar { width: 34px; height: 34px; border-radius: 10px; background: rgba(122,184,200,0.12); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 14px; color: var(--sage); flex-shrink: 0; }
 .patient-name { font-size: 13px; font-weight: 500; color: var(--dark); }
 .patient-meta { font-size: 11px; color: var(--muted); margin-top: 2px; }
@@ -70,17 +64,43 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--d
 .badge-new { background: rgba(232,213,168,0.2); color: #A08840; }
 .badge-stable { background: rgba(122,184,200,0.15); color: var(--terra); }
 
-/* Coming soon overlay */
+/* Link code input */
+.link-input-row { display: flex; gap: 10px; margin-bottom: 16px; }
+.link-input { border: 1.5px solid var(--border); border-radius: 10px; padding: 11px 16px; font-size: 18px; font-weight: 600; letter-spacing: 3px; color: var(--dark); font-family: 'DM Sans', sans-serif; background: var(--bg); outline: none; width: 160px; text-transform: uppercase; transition: border-color 0.2s; }
+.link-input:focus { border-color: var(--terra); }
+.link-input::placeholder { font-size: 13px; letter-spacing: 0; font-weight: 400; color: rgba(106,154,170,0.5); }
+.link-btn { background: var(--terra); color: white; border: none; border-radius: 10px; padding: 11px 22px; font-size: 13px; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: background 0.2s; white-space: nowrap; }
+.link-btn:hover { background: #2d6685; }
+.link-btn:disabled { background: var(--border); color: var(--muted); cursor: not-allowed; }
+.link-feedback { font-size: 12px; margin-top: 8px; line-height: 1.5; min-height: 18px; }
+.link-feedback.success { color: var(--green); }
+.link-feedback.error { color: var(--red); }
+
+/* Patient detail panel */
+.patient-detail { display: none; }
+.patient-detail.open { display: block; }
+.detail-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+.detail-avatar { width: 48px; height: 48px; border-radius: 14px; background: rgba(122,184,200,0.12); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 20px; color: var(--sage); }
+.detail-name { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--dark); }
+.detail-meta { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.back-btn { background: none; border: none; font-size: 13px; color: var(--muted); cursor: pointer; font-family: 'DM Sans', sans-serif; padding: 0; margin-bottom: 20px; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+.back-btn:hover { color: var(--dark); }
+
+/* Emotion bar */
+.emotion-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.emotion-label { font-size: 12px; color: var(--dark); width: 80px; flex-shrink: 0; }
+.emotion-track { flex: 1; height: 6px; background: var(--border); border-radius: 3px; }
+.emotion-fill { height: 6px; border-radius: 3px; background: var(--terra); }
+.emotion-val { font-size: 11px; color: var(--muted); width: 28px; text-align: right; flex-shrink: 0; }
+
+/* Remove patient */
+.remove-btn { background: none; border: 1px solid rgba(196,112,96,0.3); color: var(--red); border-radius: 8px; padding: 6px 14px; font-size: 12px; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.2s; }
+.remove-btn:hover { background: rgba(196,112,96,0.08); }
+
 .coming-soon { position: relative; }
 .coming-soon-overlay { position: absolute; inset: 0; background: rgba(247,244,238,0.85); border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; backdrop-filter: blur(2px); z-index: 10; }
 .coming-soon-label { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--terra); margin-bottom: 6px; }
 .coming-soon-text { font-size: 13px; color: var(--muted); }
-
-/* Request access state */
-#request-pending { display: none; text-align: center; padding: 60px 40px; }
-#request-pending h2 { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--dark); margin-bottom: 12px; }
-#request-pending p { font-size: 14px; color: var(--muted); line-height: 1.7; max-width: 400px; margin: 0 auto 24px; }
-#request-pending .btn { display: inline-block; background: var(--dark); color: white; padding: 12px 28px; border-radius: 12px; font-size: 14px; font-weight: 500; text-decoration: none; }
 
 @media (max-width: 900px) {
   .sidebar { width: 60px; padding: 20px 8px; }
@@ -99,180 +119,203 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--d
 
 <div id="app">
   <div class="layout">
-    <!-- Sidebar -->
     <nav class="sidebar">
       <div class="sidebar-logo">proof<span>.</span></div>
       <div class="sidebar-role" id="user-email">Clinician Portal</div>
-
-      <a href="#" class="nav-item active" onclick="showSection('dashboard')">
-        <div class="nav-dot"></div>
-        <span>Dashboard</span>
+      <a href="#" class="nav-item active" onclick="showSection('dashboard', this)">
+        <div class="nav-dot"></div><span>Dashboard</span>
       </a>
-      <a href="#" class="nav-item" onclick="showSection('patients')">
-        <div class="nav-dot"></div>
-        <span>My patients</span>
+      <a href="#" class="nav-item" onclick="showSection('patients', this)">
+        <div class="nav-dot"></div><span>My patients</span>
       </a>
-      <a href="#" class="nav-item" onclick="showSection('session-prep')">
-        <div class="nav-dot"></div>
-        <span>Session prep</span>
+      <a href="#" class="nav-item" onclick="showSection('session-prep', this)">
+        <div class="nav-dot"></div><span>Session prep</span>
       </a>
-      <a href="#" class="nav-item" onclick="showSection('reports')">
-        <div class="nav-dot"></div>
-        <span>Progress reports</span>
+      <a href="#" class="nav-item" onclick="showSection('reports', this)">
+        <div class="nav-dot"></div><span>Progress reports</span>
       </a>
-      <a href="#" class="nav-item" onclick="showSection('alerts')">
-        <div class="nav-dot"></div>
-        <span>Alerts</span>
+      <a href="#" class="nav-item" onclick="showSection('alerts', this)">
+        <div class="nav-dot"></div><span>Alerts</span>
       </a>
-
       <div class="sidebar-spacer"></div>
-
       <button class="sign-out" onclick="signOut()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
         <span>Sign out</span>
       </button>
     </nav>
 
-    <!-- Main -->
     <main class="main">
-      <!-- Dashboard section -->
+
+      <!-- DASHBOARD -->
       <div id="section-dashboard">
         <div class="page-header">
           <div class="page-greeting" id="greeting">Good morning.</div>
           <div class="page-sub" id="date-sub">Loading...</div>
         </div>
-
         <div class="stats-row">
           <div class="stat-card">
-            <div class="stat-val">—</div>
+            <div class="stat-val" id="stat-patients">—</div>
             <div class="stat-label">Active patients</div>
           </div>
           <div class="stat-card">
-            <div class="stat-val">—</div>
+            <div class="stat-val" id="stat-meals">—</div>
             <div class="stat-label">Meals this week</div>
           </div>
           <div class="stat-card">
-            <div class="stat-val">—</div>
+            <div class="stat-val" id="stat-exposures">—</div>
             <div class="stat-label">Fear foods done</div>
           </div>
           <div class="stat-card alert">
-            <div class="stat-val">—</div>
+            <div class="stat-val" id="stat-alerts">—</div>
             <div class="stat-label">Needs attention</div>
           </div>
         </div>
-
         <div class="grid-2">
-          <!-- Patient list -->
-          <div class="card coming-soon">
-            <div class="coming-soon-overlay">
-              <div class="coming-soon-label">Coming soon</div>
-              <div class="coming-soon-text">Patient data will appear here once linked</div>
-            </div>
+          <div class="card" id="dashboard-patient-list">
             <div class="card-title">Patient list</div>
-            <div class="patient-row">
-              <div class="avatar">M</div>
-              <div>
-                <div class="patient-name">Patient M</div>
-                <div class="patient-meta">14 meals · 3 fear foods · distress ↓</div>
-              </div>
-              <div class="badge badge-alert">⚠ Elevated</div>
-            </div>
-            <div class="patient-row">
-              <div class="avatar">A</div>
-              <div>
-                <div class="patient-name">Patient A</div>
-                <div class="patient-meta">11 meals · 5 fear foods</div>
-              </div>
-              <div class="badge badge-good">Improving</div>
-            </div>
-            <div class="patient-row">
-              <div class="avatar">S</div>
-              <div>
-                <div class="patient-name">Patient S</div>
-                <div class="patient-meta">3 meals · first week</div>
-              </div>
-              <div class="badge badge-new">New</div>
-            </div>
-            <div class="patient-row">
-              <div class="avatar">J</div>
-              <div>
-                <div class="patient-name">Patient J</div>
-                <div class="patient-meta">9 meals · 2 fear foods</div>
-              </div>
-              <div class="badge badge-stable">Stable</div>
+            <div id="dashboard-patients-inner">
+              <div style="font-size:13px;color:var(--muted);text-align:center;padding:32px 0;">No patients linked yet. Add patients in <a href="#" onclick="showSection('patients'); return false;" style="color:var(--terra);">My patients</a>.</div>
             </div>
           </div>
-
-          <!-- Distress trend -->
           <div class="card coming-soon">
             <div class="coming-soon-overlay">
               <div class="coming-soon-label">Coming soon</div>
               <div class="coming-soon-text">Distress trend data will appear here</div>
             </div>
             <div class="card-title">4-week distress trend · all patients</div>
-            <div style="height: 120px; display: flex; align-items: flex-end; gap: 6px; padding-top: 16px;">
-              <div style="flex:1; background: rgba(122,184,200,0.2); border-radius: 4px 4px 0 0; height: 70%;"></div>
-              <div style="flex:1; background: rgba(196,112,96,0.3); border-radius: 4px 4px 0 0; height: 90%;"></div>
-              <div style="flex:1; background: rgba(122,184,200,0.2); border-radius: 4px 4px 0 0; height: 60%;"></div>
-              <div style="flex:1; background: rgba(196,112,96,0.3); border-radius: 4px 4px 0 0; height: 80%;"></div>
-              <div style="flex:1; background: rgba(122,184,200,0.2); border-radius: 4px 4px 0 0; height: 50%;"></div>
-              <div style="flex:1; background: rgba(122,184,200,0.2); border-radius: 4px 4px 0 0; height: 55%;"></div>
-              <div style="flex:1; background: rgba(58,122,154,0.5); border-radius: 4px 4px 0 0; height: 40%;"></div>
-              <div style="flex:1; background: rgba(58,122,154,0.5); border-radius: 4px 4px 0 0; height: 35%;"></div>
+            <div style="height:120px;display:flex;align-items:flex-end;gap:6px;padding-top:16px;">
+              <div style="flex:1;background:rgba(122,184,200,0.2);border-radius:4px 4px 0 0;height:70%"></div>
+              <div style="flex:1;background:rgba(196,112,96,0.3);border-radius:4px 4px 0 0;height:90%"></div>
+              <div style="flex:1;background:rgba(122,184,200,0.2);border-radius:4px 4px 0 0;height:60%"></div>
+              <div style="flex:1;background:rgba(196,112,96,0.3);border-radius:4px 4px 0 0;height:80%"></div>
+              <div style="flex:1;background:rgba(122,184,200,0.2);border-radius:4px 4px 0 0;height:50%"></div>
+              <div style="flex:1;background:rgba(122,184,200,0.2);border-radius:4px 4px 0 0;height:55%"></div>
+              <div style="flex:1;background:rgba(58,122,154,0.5);border-radius:4px 4px 0 0;height:40%"></div>
+              <div style="flex:1;background:rgba(58,122,154,0.5);border-radius:4px 4px 0 0;height:35%"></div>
             </div>
-            <div style="display:flex; justify-content:space-between; margin-top:8px;">
-              <span style="font-size:10px; color:var(--muted);">4 weeks ago</span>
-              <span style="font-size:10px; color:var(--muted);">This week</span>
+            <div style="display:flex;justify-content:space-between;margin-top:8px;">
+              <span style="font-size:10px;color:var(--muted);">4 weeks ago</span>
+              <span style="font-size:10px;color:var(--muted);">This week</span>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="background:var(--dark);border-color:var(--dark);">
+          <div style="font-family:'Playfair Display',serif;font-size:18px;color:white;margin-bottom:8px;">Welcome to the proof. clinician portal.</div>
+          <p style="font-size:13px;color:rgba(200,223,232,0.55);line-height:1.7;margin-bottom:16px;">Your dashboard is ready. Link patients using their 6-character code found in their proof. app under Settings. Questions? <a href="mailto:celine@proofrecoveryapp.com" style="color:var(--sage);">celine@proofrecoveryapp.com</a></p>
+          <div style="font-size:12px;color:rgba(122,184,200,0.4);font-style:italic;">proof. · Used alongside treatment, never instead of it.</div>
+        </div>
+      </div>
+
+      <!-- PATIENTS -->
+      <div id="section-patients" style="display:none;">
+
+        <!-- Patient list view -->
+        <div id="patients-list-view">
+          <div class="page-header">
+            <div class="page-greeting">My patients</div>
+            <div class="page-sub">Link and manage your patients</div>
+          </div>
+
+          <!-- Link a patient -->
+          <div class="card">
+            <div class="card-title">Link a new patient</div>
+            <p style="font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:16px;">Ask your patient to open proof. → Settings and share their 6-character link code with you. Enter it below to connect their account.</p>
+            <div class="link-input-row">
+              <input class="link-input" id="link-code-input" type="text" maxlength="6" placeholder="Code" oninput="this.value = this.value.toUpperCase()">
+              <button class="link-btn" onclick="linkPatient()">Link patient →</button>
+            </div>
+            <div class="link-feedback" id="link-feedback"></div>
+          </div>
+
+          <!-- Linked patients -->
+          <div class="card">
+            <div class="card-title">Linked patients</div>
+            <div id="linked-patients-list">
+              <div style="font-size:13px;color:var(--muted);text-align:center;padding:32px 0;">No patients linked yet.</div>
             </div>
           </div>
         </div>
 
-        <!-- Welcome message -->
-        <div class="card" style="background: var(--dark); border-color: var(--dark);">
-          <div style="font-family:'Playfair Display',serif; font-size:18px; color:white; margin-bottom:8px;">Welcome to the proof. clinician portal.</div>
-          <p style="font-size:13px; color:rgba(200,223,232,0.55); line-height:1.7; margin-bottom:16px;">Your dashboard is ready. Patient data will populate here as your patients begin logging in proof. and you are linked to their accounts. Reach out to <a href="mailto:celine@proofrecoveryapp.com" style="color:var(--sage);">celine@proofrecoveryapp.com</a> to get your patients connected.</p>
-          <div style="font-size:12px; color:rgba(122,184,200,0.4); font-style:italic;">proof. · Used alongside treatment, never instead of it.</div>
+        <!-- Patient detail view -->
+        <div id="patients-detail-view" class="patient-detail">
+          <button class="back-btn" onclick="showPatientList()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+            Back to patients
+          </button>
+          <div class="detail-header">
+            <div class="detail-avatar" id="detail-avatar">—</div>
+            <div>
+              <div class="detail-name" id="detail-name">—</div>
+              <div class="detail-meta" id="detail-meta">—</div>
+            </div>
+            <button class="remove-btn" style="margin-left:auto;" onclick="removePatient()">Remove patient</button>
+          </div>
+
+          <div class="grid-2">
+            <div class="card">
+              <div class="card-title">28-day overview</div>
+              <div id="detail-stats" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                <div><div style="font-family:'Playfair Display',serif;font-size:32px;color:var(--dark);" id="d-meals">—</div><div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;">Meals logged</div></div>
+                <div><div style="font-family:'Playfair Display',serif;font-size:32px;color:var(--dark);" id="d-exposures">—</div><div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;">Exposures</div></div>
+                <div><div style="font-family:'Playfair Display',serif;font-size:32px;color:var(--dark);" id="d-days">—</div><div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;">Days active</div></div>
+                <div><div style="font-family:'Playfair Display',serif;font-size:32px;color:var(--dark);" id="d-reappraisals">—</div><div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;">Reappraisals</div></div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Emotion averages (1–10)</div>
+              <div id="detail-emotions">
+                <div style="font-size:13px;color:var(--muted);">Loading...</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Recent reappraisals</div>
+            <div id="detail-reappraisals">
+              <div style="font-size:13px;color:var(--muted);">Loading...</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Recent meals</div>
+            <div id="detail-meals">
+              <div style="font-size:13px;color:var(--muted);">Loading...</div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Other sections (placeholder) -->
-      <div id="section-patients" style="display:none;">
-        <div class="page-header">
-          <div class="page-greeting">My patients</div>
-          <div class="page-sub">Patient linking and management coming soon</div>
-        </div>
-        <div class="card" style="text-align:center; padding:60px;">
-          <div style="font-size:13px; color:var(--muted); line-height:1.7;">Patient management is in development. Contact <a href="mailto:celine@proofrecoveryapp.com" style="color:var(--terra);">celine@proofrecoveryapp.com</a> to link your patients now.</div>
-        </div>
-      </div>
-
+      <!-- SESSION PREP -->
       <div id="section-session-prep" style="display:none;">
         <div class="page-header">
           <div class="page-greeting">Session prep</div>
           <div class="page-sub">Pre-session summaries coming soon</div>
         </div>
-        <div class="card" style="text-align:center; padding:60px;">
-          <div style="font-size:13px; color:var(--muted);">Session prep summaries will appear here, generated from your patients' logged data before each session.</div>
+        <div class="card" style="text-align:center;padding:60px;">
+          <div style="font-size:13px;color:var(--muted);">Session prep summaries will appear here, generated from your patients' logged data before each session.</div>
         </div>
       </div>
 
+      <!-- REPORTS -->
       <div id="section-reports" style="display:none;">
         <div class="page-header">
           <div class="page-greeting">Progress reports</div>
           <div class="page-sub">Detailed patient progress coming soon</div>
         </div>
-        <div class="card" style="text-align:center; padding:60px;">
-          <div style="font-size:13px; color:var(--muted);">Progress reports and distress trend data will appear here.</div>
+        <div class="card" style="text-align:center;padding:60px;">
+          <div style="font-size:13px;color:var(--muted);">Progress reports and distress trend data will appear here.</div>
         </div>
       </div>
 
+      <!-- ALERTS -->
       <div id="section-alerts" style="display:none;">
         <div class="page-header">
           <div class="page-greeting">Alerts</div>
           <div class="page-sub">Patient alerts coming soon</div>
         </div>
-        <div class="card" style="text-align:center; padding:60px;">
-          <div style="font-size:13px; color:var(--muted);">Alerts for elevated distress or inactivity will appear here.</div>
+        <div class="card" style="text-align:center;padding:60px;">
+          <div style="font-size:13px;color:var(--muted);">Alerts for elevated distress or inactivity will appear here.</div>
         </div>
       </div>
 
@@ -281,61 +324,317 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--d
 </div>
 
 <script>
-// ── SUPABASE CONFIG ──────────────────────────────────────────────
-// Replace these with your actual values from supabase.com/dashboard
 const SUPABASE_URL = 'https://sihdfuuzrjuuhymivrdg.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpaGRmdXV6cmp1dWh5bWl2cmRnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI1MjI1NDUsImV4cCI6MjA4ODA5ODU0NX0.W6_JGD3qPn9jwPhm3_8b11uZvD5tHA7sh832bixSDT8';
-
 const { createClient } = supabase;
 const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-// ── AUTH CHECK ───────────────────────────────────────────────────
+let currentClinicianId = null;
+let currentPatientId = null;
+let linkedPatients = [];
+
 async function init() {
   const { data: { session } } = await sb.auth.getSession();
+  if (!session) { window.location.href = '/?clinician=login'; return; }
 
-  if (!session) {
-    // Not logged in — redirect to home with modal open
-    window.location.href = '/?clinician=login';
-    return;
-  }
-
-  // Check if user has clinician role in the clinicians table
   const { data: clinician, error } = await sb
     .from('clinicians')
-    .select('id, approved, name')
+    .select('id, approved, name, email')
     .eq('user_id', session.user.id)
     .single();
 
   if (error || !clinician) {
-    // Logged in but not yet in clinicians table — show pending state
     document.getElementById('loading').style.display = 'none';
     showPendingState(session.user.email);
     return;
   }
 
   if (!clinician.approved) {
-    // Registered but not yet approved — show pending state
     document.getElementById('loading').style.display = 'none';
     showPendingState(session.user.email);
     return;
   }
 
-  // All good — show dashboard
+  currentClinicianId = clinician.id;
   const name = clinician.name || session.user.email;
   const hour = new Date().getHours();
   const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
   document.getElementById('greeting').textContent = `${greeting}, ${name.split(' ')[0]}.`;
   document.getElementById('date-sub').textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-  document.getElementById('user-email').textContent = session.user.email;
+  document.getElementById('user-email').textContent = clinician.email || session.user.email;
 
   document.getElementById('loading').style.display = 'none';
   document.getElementById('app').style.display = 'block';
+
+  await loadLinkedPatients();
+}
+
+async function loadLinkedPatients() {
+  if (!currentClinicianId) return;
+
+  const { data: links } = await sb
+    .from('clinician_patients')
+    .select('patient_id, linked_at')
+    .eq('clinician_id', currentClinicianId);
+
+  if (!links || links.length === 0) {
+    linkedPatients = [];
+    renderPatientList();
+    updateDashboardStats();
+    return;
+  }
+
+  const patientIds = links.map(l => l.patient_id);
+
+  // Get profiles for all linked patients
+  const { data: profiles } = await sb
+    .from('profiles')
+    .select('id, username')
+    .in('id', patientIds);
+
+  // Get 28-day meal counts
+  const since28 = new Date(Date.now() - 28 * 24 * 60 * 60 * 1000).toISOString();
+  const { data: meals } = await sb
+    .from('meals')
+    .select('user_id, meal, created_at')
+    .in('user_id', patientIds)
+    .gte('created_at', since28);
+
+  // Get 7-day meals for dashboard stat
+  const since7 = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+
+  linkedPatients = (profiles || []).map(p => {
+    const link = links.find(l => l.patient_id === p.id);
+    const patientMeals = (meals || []).filter(m => m.user_id === p.id && !m.meal?.startsWith('Moment check-in'));
+    const exposures = patientMeals.filter(m => m.meal?.startsWith('Exposure:')).length;
+    const week7Meals = patientMeals.filter(m => new Date(m.created_at) >= new Date(since7)).length;
+    const daysActive = new Set(patientMeals.map(m => new Date(m.created_at).toDateString())).size;
+    return {
+      id: p.id,
+      username: p.username || 'Patient',
+      linkedAt: link?.linked_at,
+      mealCount: patientMeals.length,
+      exposureCount: exposures,
+      weekMeals: week7Meals,
+      daysActive,
+    };
+  });
+
+  renderPatientList();
+  updateDashboardStats();
+}
+
+function renderPatientList() {
+  const listEl = document.getElementById('linked-patients-list');
+  const dashEl = document.getElementById('dashboard-patients-inner');
+
+  if (linkedPatients.length === 0) {
+    listEl.innerHTML = '<div style="font-size:13px;color:var(--muted);text-align:center;padding:32px 0;">No patients linked yet. Enter a link code above to get started.</div>';
+    dashEl.innerHTML = '<div style="font-size:13px;color:var(--muted);text-align:center;padding:32px 0;">No patients linked yet. Add patients in <a href="#" onclick="showSection(\'patients\'); return false;" style="color:var(--terra);">My patients</a>.</div>';
+    return;
+  }
+
+  const rows = linkedPatients.map(p => {
+    const initial = (p.username || '?')[0].toUpperCase();
+    const activityLabel = p.weekMeals === 0 ? '<span class="badge badge-alert">No activity</span>'
+      : p.weekMeals >= 5 ? '<span class="badge badge-good">Active</span>'
+      : '<span class="badge badge-stable">Logged this week</span>';
+    return `
+      <div class="patient-row" onclick="openPatient('${p.id}')">
+        <div class="avatar">${initial}</div>
+        <div>
+          <div class="patient-name">${p.username}</div>
+          <div class="patient-meta">${p.mealCount} meals · ${p.exposureCount} exposures · ${p.daysActive} days active</div>
+        </div>
+        ${activityLabel}
+      </div>`;
+  }).join('');
+
+  listEl.innerHTML = rows;
+  dashEl.innerHTML = rows;
+}
+
+function updateDashboardStats() {
+  document.getElementById('stat-patients').textContent = linkedPatients.length;
+  const totalWeekMeals = linkedPatients.reduce((s, p) => s + p.weekMeals, 0);
+  const totalExposures = linkedPatients.reduce((s, p) => s + p.exposureCount, 0);
+  const noActivity = linkedPatients.filter(p => p.weekMeals === 0).length;
+  document.getElementById('stat-meals').textContent = totalWeekMeals;
+  document.getElementById('stat-exposures').textContent = totalExposures;
+  document.getElementById('stat-alerts').textContent = noActivity;
+}
+
+async function linkPatient() {
+  const code = document.getElementById('link-code-input').value.trim().toUpperCase();
+  const feedback = document.getElementById('link-feedback');
+  const btn = document.querySelector('.link-btn');
+
+  if (code.length !== 6) {
+    feedback.className = 'link-feedback error';
+    feedback.textContent = 'Please enter the full 6-character code.';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Linking...';
+  feedback.textContent = '';
+
+  // Look up patient by link code
+  const { data: profile, error: profileError } = await sb
+    .from('profiles')
+    .select('id, username')
+    .eq('link_code', code)
+    .single();
+
+  if (profileError || !profile) {
+    feedback.className = 'link-feedback error';
+    feedback.textContent = 'Code not found. Please check with your patient and try again.';
+    btn.disabled = false;
+    btn.textContent = 'Link patient →';
+    return;
+  }
+
+  // Check not already linked
+  const already = linkedPatients.find(p => p.id === profile.id);
+  if (already) {
+    feedback.className = 'link-feedback error';
+    feedback.textContent = `${profile.username} is already linked to your account.`;
+    btn.disabled = false;
+    btn.textContent = 'Link patient →';
+    return;
+  }
+
+  // Insert into clinician_patients
+  const { error: linkError } = await sb
+    .from('clinician_patients')
+    .insert({ clinician_id: currentClinicianId, patient_id: profile.id });
+
+  if (linkError) {
+    feedback.className = 'link-feedback error';
+    feedback.textContent = 'Something went wrong. Please try again.';
+    btn.disabled = false;
+    btn.textContent = 'Link patient →';
+    return;
+  }
+
+  feedback.className = 'link-feedback success';
+  feedback.textContent = `✓ ${profile.username} has been linked to your account.`;
+  document.getElementById('link-code-input').value = '';
+  btn.disabled = false;
+  btn.textContent = 'Link patient →';
+
+  await loadLinkedPatients();
+}
+
+async function openPatient(patientId) {
+  currentPatientId = patientId;
+  const patient = linkedPatients.find(p => p.id === patientId);
+  if (!patient) return;
+
+  // Show detail view
+  document.getElementById('patients-list-view').style.display = 'none';
+  document.getElementById('patients-detail-view').classList.add('open');
+
+  const initial = (patient.username || '?')[0].toUpperCase();
+  document.getElementById('detail-avatar').textContent = initial;
+  document.getElementById('detail-name').textContent = patient.username;
+  document.getElementById('detail-meta').textContent = `Linked ${new Date(patient.linkedAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}`;
+
+  document.getElementById('d-meals').textContent = patient.mealCount;
+  document.getElementById('d-exposures').textContent = patient.exposureCount;
+  document.getElementById('d-days').textContent = patient.daysActive;
+
+  // Fetch detailed data
+  const since28 = new Date(Date.now() - 28 * 24 * 60 * 60 * 1000).toISOString();
+
+  const [{ data: meals }, { data: checkins }] = await Promise.all([
+    sb.from('meals').select('*').eq('user_id', patientId).gte('created_at', since28).order('created_at', { ascending: false }),
+    sb.from('checkins').select('*').eq('user_id', patientId).gte('created_at', since28),
+  ]);
+
+  const realMeals = (meals || []).filter(m => !m.meal?.startsWith('Moment check-in'));
+  const reappraisals = realMeals.filter(m => m.reappraisal && m.reappraisal.length > 5);
+  document.getElementById('d-reappraisals').textContent = reappraisals.length;
+
+  // Emotion averages
+  const emotionKeys = ['anxiety', 'guilt', 'shame', 'fear', 'sadness', 'physical_discomfort'];
+  const emotionLabels = ['Anxiety', 'Guilt', 'Shame', 'Fear', 'Sadness', 'Physical'];
+  const emotionsEl = document.getElementById('detail-emotions');
+
+  if (!checkins || checkins.length === 0) {
+    emotionsEl.innerHTML = '<div style="font-size:13px;color:var(--muted);">No check-ins yet.</div>';
+  } else {
+    emotionsEl.innerHTML = emotionKeys.map((key, i) => {
+      const vals = checkins.map(c => c[key]).filter(v => v != null);
+      const avg = vals.length ? (vals.reduce((a, b) => a + b, 0) / vals.length) : 0;
+      const pct = (avg / 10) * 100;
+      return `
+        <div class="emotion-row">
+          <div class="emotion-label">${emotionLabels[i]}</div>
+          <div class="emotion-track"><div class="emotion-fill" style="width:${pct}%"></div></div>
+          <div class="emotion-val">${avg.toFixed(1)}</div>
+        </div>`;
+    }).join('');
+  }
+
+  // Reappraisals
+  const reappraisalsEl = document.getElementById('detail-reappraisals');
+  if (reappraisals.length === 0) {
+    reappraisalsEl.innerHTML = '<div style="font-size:13px;color:var(--muted);">No reappraisals logged yet.</div>';
+  } else {
+    reappraisalsEl.innerHTML = reappraisals.slice(0, 5).map(m => `
+      <div style="border-left:3px solid var(--sage);padding-left:14px;margin-bottom:14px;">
+        <div style="font-size:13px;color:var(--dark);font-style:italic;line-height:1.6;">"${m.reappraisal}"</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px;">${new Date(m.created_at).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })} · ${m.meal}</div>
+      </div>`).join('');
+  }
+
+  // Recent meals
+  const mealsEl = document.getElementById('detail-meals');
+  if (!realMeals || realMeals.length === 0) {
+    mealsEl.innerHTML = '<div style="font-size:13px;color:var(--muted);">No meals logged in the last 28 days.</div>';
+  } else {
+    mealsEl.innerHTML = realMeals.slice(0, 10).map(m => `
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--border);">
+        <div>
+          <div style="font-size:13px;font-weight:500;color:var(--dark);">${m.meal || 'Unnamed meal'}</div>
+          ${m.reappraisal ? `<div style="font-size:11px;color:var(--muted);margin-top:2px;font-style:italic;">"${m.reappraisal.substring(0, 80)}${m.reappraisal.length > 80 ? '...' : ''}"</div>` : ''}
+        </div>
+        <div style="font-size:11px;color:var(--muted);flex-shrink:0;margin-left:12px;">${new Date(m.created_at).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}</div>
+      </div>`).join('');
+  }
+}
+
+function showPatientList() {
+  currentPatientId = null;
+  document.getElementById('patients-list-view').style.display = 'block';
+  document.getElementById('patients-detail-view').classList.remove('open');
+}
+
+async function removePatient() {
+  if (!currentPatientId || !currentClinicianId) return;
+  const patient = linkedPatients.find(p => p.id === currentPatientId);
+  if (!confirm(`Remove ${patient?.username} from your patient list?`)) return;
+
+  await sb.from('clinician_patients')
+    .delete()
+    .eq('clinician_id', currentClinicianId)
+    .eq('patient_id', currentPatientId);
+
+  showPatientList();
+  await loadLinkedPatients();
+}
+
+function showSection(name, el) {
+  document.querySelectorAll('[id^="section-"]').forEach(s => s.style.display = 'none');
+  document.getElementById(`section-${name}`).style.display = 'block';
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  if (el) el.classList.add('active');
 }
 
 function showPendingState(email) {
   document.getElementById('app').style.display = 'block';
   document.querySelector('.layout').style.display = 'none';
-
   const pending = document.createElement('div');
   pending.style.cssText = 'min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px;';
   pending.innerHTML = `
@@ -349,21 +648,13 @@ function showPendingState(email) {
         Questions? <a href="mailto:celine@proofrecoveryapp.com" style="color:var(--terra);">celine@proofrecoveryapp.com</a>
       </p>
       <button onclick="signOut()" style="background:var(--dark);color:white;border:none;padding:12px 28px;border-radius:12px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;">Sign out</button>
-    </div>
-  `;
+    </div>`;
   document.body.appendChild(pending);
 }
 
 async function signOut() {
   await sb.auth.signOut();
   window.location.href = '/';
-}
-
-function showSection(name) {
-  document.querySelectorAll('[id^="section-"]').forEach(s => s.style.display = 'none');
-  document.getElementById(`section-${name}`).style.display = 'block';
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  event.currentTarget.classList.add('active');
 }
 
 init();
