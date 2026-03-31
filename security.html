@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Security & Trust — proof.</title>
+<meta name="description" content="How proof. handles patient data, privacy, and security. Built for eating disorder recovery professionals.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #F7F4EE; --dark: #1A2E38; --terra: #3A7A9A;
+  --sage: #7AB8C8; --warm: #F0E8D0; --sand: #E8D5A8;
+  --muted: #6A9AAA; --border: #D0E4EC; --card: #FFFFFF;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--dark); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+body::after { content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E"); }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 52px;
+  background: rgba(247,244,238,0.9); backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(208,228,236,0.4);
+}
+.nav-logo { font-family: 'Playfair Display', serif; font-size: 24px; letter-spacing: -0.5px; color: var(--dark); text-decoration: none; }
+.nav-logo span { color: var(--terra); }
+.nav-back { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; display: flex; align-items: center; gap: 6px; }
+.nav-back:hover { color: var(--dark); }
+
+.page-wrap { max-width: 760px; margin: 0 auto; padding: 130px 52px 100px; }
+
+.legal-eyebrow { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--terra); font-weight: 600; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+.legal-eyebrow-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--terra); }
+
+h1.legal-h1 { font-family: 'Playfair Display', serif; font-size: clamp(36px, 5vw, 56px); line-height: 1.06; letter-spacing: -2px; color: var(--dark); margin-bottom: 14px; }
+
+.legal-date { font-size: 12px; color: var(--muted); margin-bottom: 40px; padding-bottom: 28px; border-bottom: 1px solid var(--border); }
+
+.legal-intro { font-family: 'Lora', serif; font-size: 17px; line-height: 1.78; color: #4A6A78; margin-bottom: 52px; }
+
+/* Trust grid */
+.trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 52px; }
+.trust-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 22px; }
+.trust-card-icon { width: 36px; height: 36px; border-radius: 10px; background: rgba(58,122,154,0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+.trust-card-icon svg { width: 18px; height: 18px; color: var(--terra); }
+.trust-card-title { font-size: 13px; font-weight: 700; color: var(--dark); margin-bottom: 6px; }
+.trust-card-body { font-size: 12px; color: var(--muted); line-height: 1.7; }
+
+/* Sections */
+.legal-section { margin-bottom: 40px; }
+.legal-section-title { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--terra); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+.legal-section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.legal-section p { font-size: 14px; color: #3A5460; line-height: 1.82; }
+.legal-section p + p { margin-top: 10px; }
+
+.legal-highlight { background: var(--warm); border-left: 3px solid var(--sand); border-radius: 0 12px 12px 0; padding: 18px 22px; margin: 16px 0; font-size: 13px; color: #5A4A30; line-height: 1.7; }
+
+/* Commitment list */
+.commit-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-top: 12px; }
+.commit-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: #3A5460; line-height: 1.7; }
+.commit-check { width: 20px; height: 20px; border-radius: 6px; background: rgba(58,122,154,0.1); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+.commit-check svg { width: 11px; height: 11px; color: var(--terra); }
+
+/* CTA card */
+.cta-card { background: var(--dark); border-radius: 20px; padding: 36px; margin-top: 52px; }
+.cta-card h2 { font-family: 'Playfair Display', serif; font-size: 24px; color: #F7F4EE; margin-bottom: 10px; }
+.cta-card p { font-size: 14px; color: rgba(200,223,232,0.6); line-height: 1.75; margin-bottom: 24px; }
+.cta-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--sage); color: var(--dark); padding: 12px 24px; border-radius: 12px; font-size: 13px; font-weight: 600; text-decoration: none; transition: opacity 0.2s; }
+.btn-primary:hover { opacity: 0.85; }
+.btn-outline-light { display: inline-flex; align-items: center; gap: 8px; border: 1.5px solid rgba(122,184,200,0.3); color: rgba(200,223,232,0.7); padding: 11px 22px; border-radius: 12px; font-size: 13px; text-decoration: none; transition: border-color 0.2s, color 0.2s; }
+.btn-outline-light:hover { border-color: var(--sage); color: var(--sage); }
+
+.legal-trademark { margin-top: 52px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 11px; color: rgba(106,154,170,0.5); }
+
+footer { background: #111E26; padding: 44px 52px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+.footer-logo { font-family: 'Playfair Display', serif; font-size: 20px; color: rgba(200,223,232,0.3); }
+.footer-logo span { color: rgba(122,184,200,0.3); }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { font-size: 12px; color: rgba(122,184,200,0.25); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: rgba(122,184,200,0.55); }
+.footer-copy { font-size: 11px; color: rgba(122,184,200,0.18); }
+
+@keyframes up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+.fade-in { opacity: 0; animation: up 0.7s ease 0.1s forwards; }
+
+@media (max-width: 768px) {
+  nav { padding: 16px 24px; }
+  .page-wrap { padding: 110px 24px 80px; }
+  .trust-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; padding: 32px 24px; gap: 14px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">proof<span>.</span></a>
+  <a href="/" class="nav-back">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Back to home
+  </a>
+</nav>
+
+<div class="page-wrap fade-in">
+
+  <div class="legal-eyebrow"><div class="legal-eyebrow-dot"></div>For clinicians</div>
+  <h1 class="legal-h1">Security &amp; Trust</h1>
+  <p class="legal-date">Updated March 2026</p>
+
+  <p class="legal-intro">proof. was built to sit alongside clinical treatment — which means the people using it are often in a vulnerable place. We take that seriously in how we handle their data.</p>
+
+  <!-- Trust grid -->
+  <div class="trust-grid">
+    <div class="trust-card">
+      <div class="trust-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      </div>
+      <div class="trust-card-title">Encrypted in transit &amp; at rest</div>
+      <div class="trust-card-body">All patient data is encrypted using industry-standard protocols. Data in transit uses TLS. Data at rest is encrypted by our infrastructure provider.</div>
+    </div>
+    <div class="trust-card">
+      <div class="trust-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <div class="trust-card-title">Patient-controlled data</div>
+      <div class="trust-card-body">Patients own their data. Clinician access requires explicit consent via a patient-generated link code. Patients can remove clinician access or delete their account at any time.</div>
+    </div>
+    <div class="trust-card">
+      <div class="trust-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+      </div>
+      <div class="trust-card-title">Automatic session timeouts</div>
+      <div class="trust-card-body">The app automatically signs patients out after 24 minutes of inactivity, and when the app is backgrounded — protecting sensitive data on shared or borrowed devices.</div>
+    </div>
+    <div class="trust-card">
+      <div class="trust-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10a8 8 0 00-16 0c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="trust-card-title">No calorie tracking, ever</div>
+      <div class="trust-card-body">proof. does not collect calorie counts, weights, or body measurements — by design. The app tracks distress, not restriction.</div>
+    </div>
+    <div class="trust-card">
+      <div class="trust-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      </div>
+      <div class="trust-card-title">No advertising</div>
+      <div class="trust-card-body">proof. is free for patients and contains no advertising. We do not sell patient data to third parties under any circumstances.</div>
+    </div>
+    <div class="trust-card">
+      <div class="trust-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </div>
+      <div class="trust-card-title">Built in Massachusetts</div>
+      <div class="trust-card-body">Proof Health Technologies LLC is based in Boston, MA. Data security practices are designed in accordance with Massachusetts data security regulations (201 CMR 17.00).</div>
+    </div>
+  </div>
+
+  <div class="legal-section">
+    <div class="legal-section-title">Infrastructure</div>
+    <p>proof. is built on <strong>Supabase</strong>, a trusted infrastructure provider used by thousands of healthcare-adjacent applications. All data is stored on servers in the United States. Supabase provides encryption at rest and in transit, role-based access controls, and detailed audit logging.</p>
+    <p>The app is distributed exclusively through Apple's App Store under Bundle ID <code style="font-size:12px;background:rgba(58,122,154,0.08);padding:2px 6px;border-radius:4px;color:var(--terra);">com.proofrecoveryapp.proof</code>.</p>
+  </div>
+
+  <div class="legal-section">
+    <div class="legal-section-title">What proof. is — and isn't</div>
+    <div class="legal-highlight">
+      proof. is a wellness support tool designed to complement professional eating disorder treatment. It is not a medical device, clinical service, crisis line, or therapy platform. Use of proof. does not create a clinical relationship between patients and Proof Health Technologies LLC.
+    </div>
+    <p>proof. is not a covered entity or business associate under HIPAA. Patients use the app voluntarily and agree to the Terms &amp; Conditions and Medical Disclaimer on first launch, which clearly explain the nature and limitations of the tool.</p>
+  </div>
+
+  <div class="legal-section">
+    <div class="legal-section-title">Patient data access</div>
+    <p>By default, only the patient can see their own data. Clinician access requires the patient to explicitly share their 6-character link code — generated in the patient's app settings. Patients can unlink a clinician at any time from within the app.</p>
+    <p>Clinicians access patient data through a secure web portal at proofrecoveryapp.com/clinician, authenticated via email and password. Clinician accounts are manually reviewed and approved before access is granted.</p>
+  </div>
+
+  <div class="legal-section">
+    <div class="legal-section-title">Our commitments</div>
+    <ul class="commit-list">
+      <li>
+        <div class="commit-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+        We will never sell, rent, or share patient data with third parties for marketing or commercial purposes.
+      </li>
+      <li>
+        <div class="commit-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+        We will never collect calorie counts, body weights, or body measurements — by design, not just by policy.
+      </li>
+      <li>
+        <div class="commit-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+        proof. will remain free for patients. This is a permanent commitment, not a launch offer.
+      </li>
+      <li>
+        <div class="commit-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+        Patients can request deletion of their account and all associated data at any time, processed within 30 days.
+      </li>
+      <li>
+        <div class="commit-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+        We will notify clinician partners promptly in the event of any security incident affecting patient data.
+      </li>
+    </ul>
+  </div>
+
+  <div class="legal-section">
+    <div class="legal-section-title">Questions &amp; security contact</div>
+    <p>Security questions, data requests, or partnership enquiries — contact us directly at <a href="mailto:celine@proofrecoveryapp.com" style="color:var(--terra);text-decoration:none;">celine@proofrecoveryapp.com</a>. We respond to all clinical and security enquiries within 48 hours.</p>
+  </div>
+
+  <!-- CTA for clinicians -->
+  <div class="cta-card">
+    <h2>Interested in proof. for your practice?</h2>
+    <p>Request clinician access, download our one-page clinical overview, or get in touch directly. We're happy to answer any questions before you recommend proof. to patients.</p>
+    <div class="cta-buttons">
+      <a href="/?clinician=login" class="btn-primary">Request clinician access →</a>
+      <a href="mailto:celine@proofrecoveryapp.com" class="btn-outline-light">Get in touch</a>
+    </div>
+  </div>
+
+  <p class="legal-trademark">proof.™ is a trademark of Proof Health Technologies LLC. © 2026 Proof Health Technologies LLC · Boston, MA</p>
+
+</div>
+
+<footer>
+  <div class="footer-logo">proof<span>.</span></div>
+  <div class="footer-links">
+    <a href="/privacy.html">Privacy Policy</a>
+    <a href="/terms.html">Terms of Use</a>
+    <a href="/disclaimer.html">Medical Disclaimer</a>
+    <a href="/security.html">Security</a>
+    <a href="mailto:celine@proofrecoveryapp.com">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 Proof Health Technologies LLC · Boston, MA</div>
+</footer>
+
+</body>
+</html>
