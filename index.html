@@ -78,26 +78,71 @@ h1.hero-h1 em { font-style: italic; color: var(--terra); }
 .hero-note { margin-top: 20px; font-size: 12px; color: var(--muted); font-style: italic; opacity: 0; animation: up 0.8s ease 0.54s forwards; }
 
 /* phone */
-.hero-right { display: flex; justify-content: center; align-items: center; z-index: 1; opacity: 0; animation: up 0.9s ease 0.28s forwards; }
-.phone { width: 256px; height: 516px; background: var(--dark); border-radius: 44px; padding: 14px; box-shadow: 0 32px 80px rgba(26,46,56,0.3), 0 0 0 1px rgba(122,184,200,0.1); position: relative; }
-.phone-screen { width: 100%; height: 100%; background: var(--bg); border-radius: 33px; overflow: hidden; display: flex; flex-direction: column; }
-.phone-notch { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 88px; height: 28px; background: var(--dark); border-radius: 0 0 18px 18px; z-index: 2; }
-.p-header { background: var(--dark); padding: 44px 16px 16px; }
-.p-logo { font-family: 'Playfair Display', serif; font-size: 20px; color: #fff; }
-.p-logo span { color: var(--sage); }
-.p-sub { font-size: 10px; color: rgba(122,184,200,0.45); margin-top: 2px; }
-.p-body { padding: 12px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
-.p-card { background: #fff; border-radius: 12px; padding: 11px 13px; border: 1px solid var(--border); }
-.p-label { font-size: 7px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); margin-bottom: 4px; }
-.p-val { font-size: 12px; font-weight: 600; color: var(--dark); }
-.p-bar-track { height: 3px; background: var(--border); border-radius: 2px; margin-top: 5px; }
-.p-bar-fill { height: 3px; background: linear-gradient(90deg, var(--sage), var(--terra)); border-radius: 2px; }
-.p-quote { font-size: 9px; color: var(--muted); font-style: italic; line-height: 1.5; padding: 8px 10px; background: var(--warm); border-radius: 8px; border-left: 2px solid var(--sand); }
-.p-tabs { background: #fff; border-top: 1px solid var(--border); padding: 8px 6px 12px; display: flex; }
-.p-tab { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; }
-.p-tab-bar { width: 18px; height: 3px; border-radius: 2px; }
-.p-tab-label { font-size: 7px; }
+.phone-wrap { position: relative; display: flex; justify-content: center; align-items: center; }
+.phone-glow { position: absolute; width: 220px; height: 220px; background: radial-gradient(circle, rgba(122,184,200,0.2) 0%, transparent 70%); bottom: -40px; left: 50%; transform: translateX(-50%); pointer-events: none; }
+.phone-shell {
+  width: 248px; height: 530px;
+  background: linear-gradient(160deg, #2A3D48 0%, #1A2E38 40%, #141F26 100%);
+  border-radius: 50px;
+  padding: 10px;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.08),
+    0 0 0 2px rgba(0,0,0,0.6),
+    inset 0 0 0 1px rgba(255,255,255,0.04),
+    0 40px 100px rgba(0,0,0,0.5),
+    0 8px 24px rgba(0,0,0,0.3);
+  position: relative;
+}
+/* physical buttons */
+.phone-btn-vol-up { position: absolute; left: -3px; top: 100px; width: 3px; height: 28px; background: linear-gradient(90deg, #0e1a20, #1e3040); border-radius: 2px 0 0 2px; box-shadow: -1px 0 2px rgba(0,0,0,0.4); }
+.phone-btn-vol-down { position: absolute; left: -3px; top: 138px; width: 3px; height: 28px; background: linear-gradient(90deg, #0e1a20, #1e3040); border-radius: 2px 0 0 2px; box-shadow: -1px 0 2px rgba(0,0,0,0.4); }
+.phone-btn-power { position: absolute; right: -3px; top: 118px; width: 3px; height: 44px; background: linear-gradient(270deg, #0e1a20, #1e3040); border-radius: 0 2px 2px 0; box-shadow: 1px 0 2px rgba(0,0,0,0.4); }
+.phone-inner {
+  width: 100%; height: 100%;
+  background: #0d1519;
+  border-radius: 42px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
+}
+.phone-screen { width: 100%; height: 100%; background: var(--bg); border-radius: 40px; overflow: hidden; display: flex; flex-direction: column; }
 
+/* status bar */
+.ps-status { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px 0; background: var(--dark); }
+.ps-time { font-size: 11px; font-weight: 600; color: #fff; letter-spacing: -0.3px; }
+.ps-icons { display: flex; align-items: center; gap: 5px; }
+
+/* dynamic island */
+.ps-island { width: 88px; height: 26px; background: #0d1519; border-radius: 20px; margin: 6px auto 0; position: relative; z-index: 2; }
+
+/* header */
+.ps-header { background: var(--dark); padding: 10px 16px 14px; display: flex; align-items: center; justify-content: space-between; }
+.ps-logo { font-family: 'Playfair Display', serif; font-size: 18px; color: #fff; line-height: 1; }
+.ps-logo span { color: var(--sage); }
+.ps-greeting { font-size: 9px; color: rgba(122,184,200,0.5); margin-top: 2px; }
+.ps-settings-btn { width: 26px; height: 26px; border-radius: 8px; background: rgba(122,184,200,0.08); display: flex; align-items: center; justify-content: center; }
+
+/* wave banner */
+.ps-wave-banner { background: var(--dark); margin-top: -1px; }
+
+/* body */
+.ps-body { padding: 10px; flex: 1; display: flex; flex-direction: column; gap: 7px; overflow: hidden; }
+.ps-card { background: #fff; border-radius: 14px; padding: 10px 12px; border: 1px solid var(--border); }
+.ps-card-primary { border-color: rgba(58,122,154,0.2); }
+.ps-card-sand { background: #F5EDD6; border-color: #C4A870; }
+.ps-card-pill { display: inline-block; background: var(--warm); border-radius: 20px; padding: 2px 8px; font-size: 7px; font-weight: 700; color: var(--terra); letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 5px; }
+.ps-card-title { font-size: 11px; font-weight: 600; color: var(--dark); margin-bottom: 2px; }
+.ps-card-sub { font-size: 8.5px; color: var(--muted); line-height: 1.4; margin-bottom: 8px; }
+.ps-cta-btn { background: var(--terra); color: #fff; border-radius: 8px; padding: 6px 10px; font-size: 9px; font-weight: 600; display: inline-block; }
+.ps-wave-label { font-size: 7.5px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
+
+/* tab bar */
+.ps-tabs { background: #fff; border-top: 1px solid var(--border); padding: 8px 4px 2px; display: flex; }
+.ps-tab { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.ps-tab span { font-size: 7px; color: rgba(106,154,170,0.5); }
+.ps-tab-active span { color: var(--terra); font-weight: 600; }
+.ps-home-bar { height: 18px; background: #fff; display: flex; align-items: center; justify-content: center; }
+.ps-home-bar::after { content: ''; width: 90px; height: 4px; background: var(--dark); border-radius: 3px; opacity: 0.15; }
 /* ── STRIP ───────────────────────────────────────────────────── */
 .strip { background: var(--dark); padding: 26px 52px; display: flex; align-items: center; justify-content: center; gap: 52px; flex-wrap: wrap; }
 .strip-item { display: flex; align-items: center; gap: 9px; font-size: 12px; color: rgba(200,223,232,0.5); }
@@ -400,13 +445,13 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
   <div class="reveal">
     <div class="sec-eyebrow">How it works</div>
     <h2 class="sec-h2">Every meal logged<br>becomes <em>evidence.</em></h2>
-    <p class="sec-body">proof. doesn't track calories. It tracks courage — and builds a personal archive of every time distress rose and fell so patients can see their own survival, in their own words.</p>
+    <p class="sec-body">proof. never asks what you ate. It tracks how you felt — and builds a personal archive of every time distress rose and fell, so patients can see their own survival in their own words.>
   </div>
   <div class="how-grid">
     <div class="how-card reveal">
       <div class="how-num">01</div>
       <div class="how-title">Log the meal</div>
-      <div class="how-body">Rate distress before and after. Name what you felt. Write one kind thought to yourself. The whole log takes under two minutes.</div>
+<div class="how-body">Choose a meal type. Rate your emotions before and after. Write one kind thought. proof. never asks what you ate — only how you felt.</div>
     </div>
     <div class="how-card reveal">
       <div class="how-num">02</div>
@@ -494,8 +539,8 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
           <div><div class="free-item-title">Therapist summaries</div><div class="free-item-sub">PDF export ready to share before your session</div></div>
         </div>
         <div class="free-item">
-          <div class="free-item-title">No ads. No data selling.</div>
-<div class="free-item-sub">Supported by treatment centre partnerships and grants</div>
+          <div class="free-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div><div class="free-item-title">Social eating support</div><div class="free-item-sub">Before, during, and after meals with others — when it's hardest</div></div>
         </div>
       </div>
     </div>
