@@ -276,6 +276,31 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
   .strip-div { display: none; }
   footer { flex-direction: column; padding: 32px 24px; gap: 14px; }
 }
+  /* ── CLINICIAN DROPDOWN ──────────────────────────────────────── */
+.nav-clinician-wrap { position: relative; }
+.nav-clinician-dropdown {
+  position: absolute; top: calc(100% + 10px); left: 50%;
+  transform: translateX(-50%);
+  background: #fff; border: 1px solid var(--border);
+  border-radius: 14px; padding: 6px;
+  box-shadow: 0 8px 32px rgba(26,46,56,0.12);
+  min-width: 180px; z-index: 200;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.18s, transform 0.18s;
+  transform: translateX(-50%) translateY(4px);
+}
+.nav-clinician-wrap:hover .nav-clinician-dropdown {
+  opacity: 1; pointer-events: all;
+  transform: translateX(-50%) translateY(0);
+}
+.nav-clinician-dropdown a {
+  display: flex; align-items: center; gap: 9px;
+  padding: 10px 14px; border-radius: 9px;
+  font-size: 13px; color: var(--dark);
+  text-decoration: none; font-weight: 500;
+  transition: background 0.15s;
+}
+.nav-clinician-dropdown a:hover { background: var(--bg); color: var(--terra); }
 </style>
 </head>
 <body>
@@ -287,10 +312,23 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
     <a href="#how">How it works</a>
     <a href="#science">The science</a>
     <a href="#free">Always free</a>
-    <a href="#" class="nav-clinician" onclick="openModal(); return false;">
-      <div class="nav-clinician-dot"></div>
-      For Clinicians
-    </a>
+    <div class="nav-clinician-wrap">
+      <a href="#" class="nav-clinician" onclick="openModal(); return false;">
+        <div class="nav-clinician-dot"></div>
+        For Clinicians
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-left:2px;"><polyline points="6 9 12 15 18 9"/></svg>
+      </a>
+      <div class="nav-clinician-dropdown">
+        <a href="#" onclick="openModal(); return false;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          Clinician portal
+        </a>
+        <a href="/clinicians.html" target="_blank">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Clinician guide
+        </a>
+      </div>
+    </div>
     <a href="#" class="nav-cta">Download</a>
   </div>
 </nav>
