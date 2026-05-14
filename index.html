@@ -82,7 +82,7 @@ h1.hero-h1 em { font-style: italic; color: var(--terra); }
 .phone-glow { position: absolute; width: 220px; height: 220px; background: radial-gradient(circle, rgba(122,184,200,0.2) 0%, transparent 70%); bottom: -40px; left: 50%; transform: translateX(-50%); pointer-events: none; }
 .phone-shell {
   width: 244px; height: 526px;
-  background: linear-gradient(160deg, #2A3D48 0%, #1A2E38 40%, #141F26 100%);
+  background: linear-gradient(160deg, #1a1a1a 0%, #0d0d0d 40%, #080808 100%);
   border-radius: 54px;
   padding: 10px;
   box-shadow:
@@ -94,12 +94,12 @@ h1.hero-h1 em { font-style: italic; color: var(--terra); }
   position: relative;
 }
 /* physical buttons */
-.phone-btn-vol-up { position: absolute; left: -3px; top: 100px; width: 3px; height: 28px; background: linear-gradient(90deg, #0e1a20, #1e3040); border-radius: 2px 0 0 2px; box-shadow: -1px 0 2px rgba(0,0,0,0.4); }
-.phone-btn-vol-down { position: absolute; left: -3px; top: 138px; width: 3px; height: 28px; background: linear-gradient(90deg, #0e1a20, #1e3040); border-radius: 2px 0 0 2px; box-shadow: -1px 0 2px rgba(0,0,0,0.4); }
-.phone-btn-power { position: absolute; right: -3px; top: 118px; width: 3px; height: 44px; background: linear-gradient(270deg, #0e1a20, #1e3040); border-radius: 0 2px 2px 0; box-shadow: 1px 0 2px rgba(0,0,0,0.4); }
+.phone-btn-vol-up { position: absolute; left: -3px; top: 100px; width: 3px; height: 28px; background: linear-gradient(90deg, #080808, #141414); border-radius: 2px 0 0 2px; box-shadow: -1px 0 2px rgba(0,0,0,0.6); }
+.phone-btn-vol-down { position: absolute; left: -3px; top: 138px; width: 3px; height: 28px; background: linear-gradient(90deg, #080808, #141414); border-radius: 2px 0 0 2px; box-shadow: -1px 0 2px rgba(0,0,0,0.6); }
+.phone-btn-power { position: absolute; right: -3px; top: 118px; width: 3px; height: 44px; background: linear-gradient(270deg, #080808, #141414); border-radius: 0 2px 2px 0; box-shadow: 1px 0 2px rgba(0,0,0,0.6); }
 .phone-inner {
   width: 100%; height: 100%;
-  background: #0d1519;
+  background: #050505;
   border-radius: 46px;
   overflow: hidden;
   position: relative;
@@ -340,7 +340,6 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
 <!-- HERO -->
 <section class="hero">
   <div class="hero-left">
-    <div class="eyebrow"><div class="eyebrow-dot"></div>You don't have to do this alone.</div>
     <h1 class="hero-h1">Your own past<br>is the <em>proof</em><br>you can do this.</h1>
     <p class="hero-body">Every meal you log becomes evidence — your own proof that distress rises and, with time, falls. That you survived it before. That you can again.</p>
     <div class="hero-actions">
@@ -489,9 +488,30 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
     <h2 class="sec-h2">Every meal logged<br>becomes <em>evidence.</em></h2>
     <p class="sec-body">proof. never asks what you ate. It tracks how you felt — and builds a personal archive of every time distress rose and fell, so patients can see their own survival in their own words.</p>
   </div>
-  <div class="how-grid">
+<div class="how-grid">
     <div class="how-card reveal">
-      <div class="how-num">01</div>
+      <div class="how-title">Log the meal</div>
+      <div class="how-body">Choose a meal type. Rate your emotions before and after. Write one kind thought. proof. never asks what you ate — only how you felt.</div>
+    </div>
+    <div class="how-card reveal">
+      <div class="how-title">Watch the wave</div>
+      <div class="how-body">The Distress Wave shows exactly what ERP predicts — anxiety peaks, then falls. Over time, patients collect their own graph of survival.</div>
+    </div>
+    <div class="how-card reveal">
+      <div class="how-title">Cope between sessions</div>
+      <div class="how-body">Five evidence-based tools — grounding, urge surfing, self-compassion, body scan, thought defusion — available in the hardest moments.</div>
+    </div>
+  </div>
+  <div class="how-grid" style="grid-template-columns: repeat(2, 1fr); max-width: 66%; margin-top: 20px;">
+    <div class="how-card reveal">
+      <div class="how-title">Check in to your body</div>
+      <div class="how-body">Moment check-ins capture body tension, emotion, and a kind thought — independent of meals. Builds interoceptive awareness over time.</div>
+    </div>
+    <div class="how-card reveal">
+      <div class="how-title">Share with your team</div>
+      <div class="how-body">Generate a therapist summary — every logged meal, distress arc, and reappraisal — ready to share before a session.</div>
+    </div>
+  </div>
       <div class="how-title">Log the meal</div>
 <div class="how-body">Choose a meal type. Rate your emotions before and after. Write one kind thought. proof. never asks what you ate — only how you felt.</div>
     </div>
