@@ -266,6 +266,18 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
 @media (max-width: 900px) {
   nav { padding: 16px 24px; }
   .nav-links { display: none; }
+  .nav-links.open { display: flex; flex-direction: column; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 200; padding: 80px 32px 40px; gap: 0; justify-content: flex-start; }
+  .nav-links.open a { font-size: 22px; color: var(--dark); padding: 18px 0; border-bottom: 1px solid var(--border); font-family: 'Playfair Display', serif; }
+  .nav-links.open a:last-child { border-bottom: none; }
+  .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { width: 22px; height: 2px; background: var(--dark); border-radius: 2px; transition: all 0.2s; display: block; }
+  .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+}
+@media (min-width: 901px) {
+  .hamburger { display: none; }
+}
   .hero { grid-template-columns: 1fr; padding: 120px 24px 60px; text-align: center; }
   .hero-right { display: none; }
   .hero-body { margin: 0 auto 38px; }
@@ -322,7 +334,10 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">proof<span>.</span></a>
-  <div class="nav-links">
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="nav-links" id="navLinks">
     <a href="#how">How it works</a>
     <a href="#approach">The approach</a>
     <a href="#free">Always free</a>
@@ -698,5 +713,19 @@ function switchTab(tab) {
     : "Tell us a bit about yourself and we'll set you up within 48 hours.";
 }
 </script>
+  function toggleMenu() {
+  const nav = document.getElementById('navLinks');
+  const ham = document.getElementById('hamburger');
+  nav.classList.toggle('open');
+  ham.classList.toggle('open');
+  document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
+}
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    document.getElementById('navLinks').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
 </body>
 </html>
