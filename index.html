@@ -313,7 +313,14 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
   min-width: 180px; z-index: 200;
   opacity: 0; pointer-events: none;
   transition: opacity 0.18s, transform 0.18s;
-  transform: translateX(-50%) translateY(4px);
+}
+.nav-clinician-wrap:hover .nav-clinician-dropdown {
+  opacity: 1; pointer-events: all;
+  transform: translateX(-50%) translateY(0);
+}
+@media (max-width: 900px) {
+  .nav-clinician-dropdown { display: none; }
+  .nav-clinician-wrap:hover .nav-clinician-dropdown { display: none; }
 }
 .nav-clinician-wrap:hover .nav-clinician-dropdown {
   opacity: 1; pointer-events: all;
@@ -530,7 +537,7 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
     <h2 class="sec-h2">Built on what<br><em>actually works.</em></h2>
     <p class="sec-body">proof. is built on the mechanisms that actually change eating disorder behaviors — not affirmations, not rules, not numbers.</p>
   </div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:36px;" class="reveal">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:36px;" class="reveal approach-pills-grid">
     <div class="sci-pill">
       <div class="sci-pill-label">Exposure & Response Prevention</div>
       <div class="sci-pill-text">The gold standard for anxiety-driven restriction. proof. operationalises ERP by logging distress before, during, and after every meal — creating repeated evidence that the feared outcome does not occur.</div>
@@ -712,7 +719,7 @@ function switchTab(tab) {
     ? 'Sign in to access your clinician dashboard, or request access to get started.'
     : "Tell us a bit about yourself and we'll set you up within 48 hours.";
 }
-</script>
+<script>
   function toggleMenu() {
   const nav = document.getElementById('navLinks');
   const ham = document.getElementById('hamburger');
