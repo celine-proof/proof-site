@@ -261,7 +261,7 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
 @keyframes up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.65s ease, transform 0.65s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
-
+.no-js .reveal { opacity: 1; transform: none; }
 /* responsive */
 @media (max-width: 900px) {
   nav { padding: 16px 24px; }
@@ -305,8 +305,8 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
   top: 100%; left: 0; right: 0; height: 12px;
 }
 .nav-clinician-dropdown {
-  position: absolute; top: calc(100% + 10px); left: 50%;
-  transform: translateX(-50%);
+  position: absolute; top: calc(100% + 10px); right: 0; left: auto;
+  transform: none;
   background: #fff; border: 1px solid var(--border);
   border-radius: 14px; padding: 6px;
   box-shadow: 0 8px 32px rgba(26,46,56,0.12);
@@ -316,7 +316,7 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
 }
 .nav-clinician-wrap:hover .nav-clinician-dropdown {
   opacity: 1; pointer-events: all;
-  transform: translateX(-50%) translateY(0);
+  transform: translateY(0);
 }
 @media (max-width: 900px) {
   .nav-clinician-dropdown { display: none; }
@@ -694,20 +694,7 @@ if (clinicianParam === 'login') {
   setTimeout(() => openModal(), 100);
 } else if (clinicianParam === 'request') {
   setTimeout(() => { openModal(); switchTab('request'); }, 100);
-  <script>
-// Scroll reveal
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-  const clinicianParam = new URLSearchParams(window.location.search).get('clinician');
-if (clinicianParam === 'login') {
-  setTimeout(() => openModal(), 100);
-} else if (clinicianParam === 'request') {
-  setTimeout(() => { openModal(); switchTab('request'); }, 100);
 }
-
 function openModal() {
   document.getElementById('clinicianModal').classList.add('open');
   document.body.style.overflow = 'hidden';
