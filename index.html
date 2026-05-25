@@ -265,8 +265,8 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
 /* responsive */
 @media (max-width: 900px) {
   nav { padding: 16px 24px; }
-  .nav-links { display: none; }
-  .nav-links.open { display: flex; flex-direction: column; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 200; padding: 80px 32px 40px; gap: 0; justify-content: flex-start; }
+  .nav-links { display: none !important; }
+  .nav-links.open { display: flex !important; flex-direction: column; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 200; padding: 80px 32px 40px; gap: 0; justify-content: flex-start; }
   .nav-links.open a { font-size: 22px; color: var(--dark); padding: 18px 0; border-bottom: 1px solid var(--border); font-family: 'Playfair Display', serif; }
   .nav-links.open a:last-child { border-bottom: none; }
   .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
@@ -772,6 +772,6 @@ document.querySelectorAll('.nav-links a').forEach(link => {
     document.getElementById('hamburger').classList.remove('open');
     document.body.style.overflow = '';
   });
-});
+</script>
 </body>
 </html>
