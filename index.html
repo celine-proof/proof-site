@@ -72,7 +72,7 @@ h1.hero-h1 em { font-style: italic; color: var(--terra); }
 
 .hero-body { font-family: 'Lora', serif; font-size: 17px; line-height: 1.78; color: #4A6A78; max-width: 460px; margin-bottom: 38px; opacity: 0; animation: up 0.8s ease 0.32s forwards; }
 
-.hero-actions { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; opacity: 0; animation: up 0.8s ease 0.44s forwards; }
+.hero-actions { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; opacity: 0; animation: up 0.8s ease 0.44s forwards; justify-content: center; }
 .btn-primary { display: inline-flex; align-items: center; gap: 9px; background: var(--dark); color: #fff; padding: 14px 28px; border-radius: 14px; font-size: 14px; font-weight: 600; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 24px rgba(26,46,56,0.18); }
 .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(26,46,56,0.24); }
 .hero-note { margin-top: 20px; font-size: 12px; color: var(--muted); font-style: italic; opacity: 0; animation: up 0.8s ease 0.54s forwards; }
@@ -306,7 +306,7 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
 }
 .nav-clinician-dropdown {
   position: absolute; top: calc(100% + 10px); right: 0; left: auto;
-  transform: none;
+  transform: none; min-width: 200px;
   background: #fff; border: 1px solid var(--border);
   border-radius: 14px; padding: 6px;
   box-shadow: 0 8px 32px rgba(26,46,56,0.12);
