@@ -305,8 +305,8 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
   top: 100%; left: 0; right: 0; height: 12px;
 }
 .nav-clinician-dropdown {
-  position: absolute; top: calc(100% + 10px); right: 0; left: auto;
-  transform: none; min-width: 200px;
+  position: absolute; top: calc(100% + 10px); left: 50%; right: auto;
+  transform: translateX(-50%); min-width: 200px;
   background: #fff; border: 1px solid var(--border);
   border-radius: 14px; padding: 6px;
   box-shadow: 0 8px 32px rgba(26,46,56,0.12);
@@ -316,7 +316,7 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
 }
 .nav-clinician-wrap:hover .nav-clinician-dropdown {
   opacity: 1; pointer-events: all;
-  transform: translateY(0);
+  transform: translateX(-50%) translateY(0);
 }
 @media (max-width: 900px) {
   .nav-clinician-dropdown { display: none; }
