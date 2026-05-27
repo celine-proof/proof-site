@@ -306,8 +306,8 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
   top: 100%; left: 0; right: 0; height: 12px;
 }
 .nav-clinician-dropdown {
-  position: absolute; top: calc(100% + 10px); right: 0; left: auto;
-  transform: none; min-width: 200px;
+  position: absolute; top: calc(100% + 8px); left: 50%; right: auto;
+  transform: translateX(-50%); min-width: 200px;
   background: #fff; border: 1px solid var(--border);
   border-radius: 14px; padding: 6px;
   box-shadow: 0 8px 32px rgba(26,46,56,0.12);
@@ -322,10 +322,6 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
 @media (max-width: 900px) {
   .nav-clinician-dropdown { display: none; }
   .nav-clinician-wrap:hover .nav-clinician-dropdown { display: none; }
-}
-.nav-clinician-wrap:hover .nav-clinician-dropdown {
-  opacity: 1; pointer-events: all;
-  transform: translateX(-50%) translateY(0);
 }
 .nav-clinician-dropdown a {
   display: flex; align-items: center; gap: 9px;
@@ -350,7 +346,7 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
     <a href="#approach">The approach</a>
     <a href="#free">Always free</a>
     <div class="nav-clinician-wrap">
-      <button onclick="toggleMenu()" style="position:absolute;top:24px;right:24px;background:none;border:none;font-size:28px;color:var(--dark);cursor:pointer;">✕</button>
+      
       <a href="#" class="nav-clinician" onclick="openModal(); return false;">
         <div class="nav-clinician-dot"></div>
         For Clinicians
@@ -475,7 +471,11 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
                 <div style="font-size:8px;color:#3D6B45;font-weight:600;margin-top:4px;">Wave complete</div>
               </div>
             </div>
-
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- STRIP -->
