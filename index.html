@@ -279,8 +279,29 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
 @media (min-width: 901px) {
   .hamburger { display: none; }
 }
- .hero { grid-template-columns: 1fr; padding: 140px 24px 60px; text-align: center; }
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; padding: 140px 24px 60px; text-align: center; }
   .hero-right { display: none; }
+  .hero-body { margin: 0 auto 38px; }
+  .how-grid { grid-template-columns: 1fr; }
+  .sci-grid { grid-template-columns: 1fr; }
+  .free { grid-template-columns: 1fr; gap: 40px; }
+  section { padding: 64px 24px; }
+  .strip { gap: 20px; padding: 22px 24px; }
+  .strip-div { display: none; }
+  footer { flex-direction: column; padding: 32px 24px; gap: 14px; }
+  .approach-pills-grid { grid-template-columns: 1fr !important; }
+  .how-grid-bottom { grid-template-columns: 1fr !important; max-width: 100% !important; }
+  .fit-grid { grid-template-columns: 1fr; gap: 32px; }
+  .summary-grid { grid-template-columns: 1fr; gap: 32px; }
+  .disc-grid { grid-template-columns: 1fr; gap: 16px; }
+  .features-grid { grid-template-columns: 1fr; }
+  .steps-grid { grid-template-columns: 1fr; }
+  .step { border-right: none; border-bottom: 1px solid var(--border); }
+  .step:last-child { border-bottom: none; }
+  .nav-clinician-wrap { display: none; }
+  .mobile-clinician-link { display: block !important; }
+}
   .hero-body { margin: 0 auto 38px; }
   .how-grid { grid-template-columns: 1fr; }
   .sci-grid { grid-template-columns: 1fr; }
@@ -345,6 +366,8 @@ position: fixed; top: 64px; right: 180px; left: auto;
     <a href="#how">How it works</a>
     <a href="#approach">The approach</a>
     <a href="#free">Always free</a>
+    <a href="#" onclick="openModal(); return false;" class="mobile-clinician-link" style="display:none;">Clinician Portal</a>
+    <a href="/clinicianguide.html" class="mobile-clinician-link" style="display:none;">Clinician Guide</a>
     <div class="nav-clinician-wrap">
       
       <a href="#" class="nav-clinician" onclick="openModal(); return false;">
