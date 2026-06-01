@@ -30,7 +30,7 @@ body::after { content: ''; position: fixed; inset: 0; z-index: 9999; pointer-eve
 
 /* ── NAV ─────────────────────────────────────────────────────── */
 nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 10000;
   display: flex; align-items: center; justify-content: space-between;
   padding: 18px 52px;
   background: rgba(247,244,238,0.97);
@@ -268,11 +268,13 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
   .nav-links { display: none !important; visibility: hidden; }
   .nav-links.open { display: flex !important; visibility: visible; flex-direction: column; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 10000; padding: 0; gap: 0; justify-content: flex-start; overflow-y: auto; }
   .nav-menu-header { display: none; }
-  .nav-links.open .nav-menu-header { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--bg); z-index: 2; }
+  .nav-links.open .nav-menu-header { display: flex; align-items: center; justify-content: space-between; padding: 24px 24px 20px; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--bg); z-index: 2; min-height: 70px; }
   .nav-menu-header-logo { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--dark); }
   .nav-menu-header-logo span { color: var(--terra); }
   .nav-close { width: 36px; height: 36px; border-radius: 50%; background: rgba(208,228,236,0.4); border: none; font-size: 18px; color: var(--dark); cursor: pointer; display: flex; align-items: center; justify-content: center; }
-  .nav-links.open a { font-size: 22px; color: var(--dark); padding: 20px 24px; border-bottom: 1px solid var(--border); font-family: 'Playfair Display', serif; display: block; }
+  .nav-links.open a { font-size: 22px; color: var(--dark); padding: 20px 24px; border-bottom: 1px solid var(--border); font-family: 'Playfair Display', serif; display: block; width: 100%; }
+  .nav-links.open .mobile-clinician-link { display: block !important; }
+  .nav-links.open .nav-clinician-wrap { display: none !important; }
   .nav-links.open a:last-child { border-bottom: none; }
   .nav-links.open a { font-size: 22px; color: var(--dark); padding: 18px 0; border-bottom: 1px solid var(--border); font-family: 'Playfair Display', serif; }
   .nav-links.open a:last-child { border-bottom: none; }
