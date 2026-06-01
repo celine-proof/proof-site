@@ -266,9 +266,14 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
 @media (max-width: 900px) {
   nav { padding: 16px 24px; }
   .nav-links { display: none !important; visibility: hidden; }
-  .nav-links.open { display: flex !important; visibility: visible; flex-direction: column; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 10000; padding: 100px 32px 60px; gap: 0; justify-content: flex-start; overflow-y: auto; }
-  .nav-close { display: none; position: absolute; top: 24px; right: 24px; width: 36px; height: 36px; border-radius: 50%; background: rgba(208,228,236,0.4); border: none; font-size: 20px; color: var(--dark); cursor: pointer; align-items: center; justify-content: center; z-index: 10001; }
-  .nav-links.open .nav-close { display: flex; }
+  .nav-links.open { display: flex !important; visibility: visible; flex-direction: column; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 10000; padding: 0; gap: 0; justify-content: flex-start; overflow-y: auto; }
+  .nav-menu-header { display: none; }
+  .nav-links.open .nav-menu-header { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--bg); z-index: 2; }
+  .nav-menu-header-logo { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--dark); }
+  .nav-menu-header-logo span { color: var(--terra); }
+  .nav-close { width: 36px; height: 36px; border-radius: 50%; background: rgba(208,228,236,0.4); border: none; font-size: 18px; color: var(--dark); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  .nav-links.open a { font-size: 22px; color: var(--dark); padding: 20px 24px; border-bottom: 1px solid var(--border); font-family: 'Playfair Display', serif; display: block; }
+  .nav-links.open a:last-child { border-bottom: none; }
   .nav-links.open a { font-size: 22px; color: var(--dark); padding: 18px 0; border-bottom: 1px solid var(--border); font-family: 'Playfair Display', serif; }
   .nav-links.open a:last-child { border-bottom: none; }
   .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
@@ -365,8 +370,11 @@ position: fixed; top: 64px; right: 180px; left: auto;
   <div class="hamburger" id="hamburger" onclick="toggleMenu()">
     <span></span><span></span><span></span>
   </div>
-  <div class="nav-links" id="navLinks">
-    <button class="nav-close" onclick="toggleMenu()">✕</button>
+<div class="nav-links" id="navLinks">
+    <div class="nav-menu-header">
+      <div class="nav-menu-header-logo">proof<span>.</span></div>
+      <button class="nav-close" onclick="toggleMenu()">✕</button>
+    </div>
     <a href="#how">How it works</a>
     <a href="#approach">The approach</a>
     <a href="#free">Always free</a>
