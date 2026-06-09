@@ -266,7 +266,7 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
 @media (max-width: 900px) {
   nav { padding: 16px 24px; }
   .nav-links { display: none !important; visibility: hidden; }
-  .nav-links.open { display: flex !important; visibility: visible; flex-direction: column; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 10000; padding: 0; gap: 0; justify-content: flex-start; overflow-y: auto; }
+  .nav-links.open { display: flex !important; visibility: visible; flex-direction: column; position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; background: var(--bg); z-index: 10000; padding: 0; gap: 0; justify-content: flex-start; overflow-y: auto; }
   .nav-menu-header { display: none; }
   .nav-links.open .nav-menu-header { display: flex; align-items: center; justify-content: space-between; padding: 24px 24px 20px; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--bg); z-index: 2; min-height: 70px; }
   .nav-menu-header-logo { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--dark); }
@@ -312,24 +312,7 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
   .mobile-clinician-link { display: block !important; }
   .nav-cta { padding: 7px 16px; font-size: 12px; }
 }
-  .hero-body { margin: 0 auto 38px; }
-  .how-grid { grid-template-columns: 1fr; }
-  .sci-grid { grid-template-columns: 1fr; }
-  .free { grid-template-columns: 1fr; gap: 40px; }
-  section { padding: 64px 24px; }
-  .strip { gap: 20px; padding: 22px 24px; }
-  .strip-div { display: none; }
-  footer { flex-direction: column; padding: 32px 24px; gap: 14px; }
-  .approach-pills-grid { grid-template-columns: 1fr !important; }
-  .how-grid-bottom { grid-template-columns: 1fr !important; max-width: 100% !important; }
-  .fit-grid { grid-template-columns: 1fr; gap: 32px; }
-  .summary-grid { grid-template-columns: 1fr; gap: 32px; }
-  .disc-grid { grid-template-columns: 1fr; gap: 16px; }
-  .features-grid { grid-template-columns: 1fr; }
-  .steps-grid { grid-template-columns: 1fr; }
-  .step { border-right: none; border-bottom: 1px solid var(--border); }
-  .step:last-child { border-bottom: none; }
-}
+
   /* ── CLINICIAN DROPDOWN ──────────────────────────────────────── */
 .nav-clinician-wrap { position: static; display: inline-flex; align-items: center; }
 .nav-clinician-wrap::after {
