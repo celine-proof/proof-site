@@ -267,17 +267,15 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
 @media (max-width: 900px) {
   nav { padding: 16px 24px; }
   .nav-links { display: none !important; visibility: hidden; }
-  .nav-links.open { display: flex !important; visibility: visible; flex-direction: column; position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; background: var(--bg); z-index: 10000; padding: 0; gap: 0; justify-content: flex-start; overflow-y: auto; }
-  .nav-menu-header { display: none !important; }
-  .nav-links.open .nav-menu-header { display: flex; align-items: center; justify-content: space-between; padding: 24px 24px 20px; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--bg); z-index: 2; min-height: 70px; }
+.nav-links.open { display: flex !important; visibility: visible; flex-direction: column; position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; background: var(--bg); z-index: 10000; padding: 0; gap: 0; justify-content: flex-start; overflow-y: scroll; -webkit-overflow-scrolling: touch; }
+.nav-menu-header { display: none !important; }
+  .nav-links.open .nav-menu-header { display: flex !important; align-items: center; justify-content: space-between; padding: 24px 24px 20px; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--bg); z-index: 2; min-height: 70px; }
   .nav-menu-header-logo { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--dark); }
   .nav-menu-header-logo span { color: var(--terra); }
   .nav-close { width: 36px; height: 36px; border-radius: 50%; background: rgba(208,228,236,0.4); border: none; font-size: 18px; color: var(--dark); cursor: pointer; display: flex; align-items: center; justify-content: center; }
-  .nav-links.open a { font-size: 22px; color: var(--dark); padding: 20px 24px; border-bottom: 1px solid var(--border); font-family: 'Playfair Display', serif; display: block; width: 100%; }
+ .nav-links.open a { font-size: 22px; color: var(--dark); padding: 20px 24px; border-bottom: 1px solid var(--border); font-family: 'Playfair Display', serif; display: block; width: 100%; }
   .nav-links.open .mobile-clinician-link { display: block !important; }
   .nav-links.open .nav-clinician-wrap { display: none !important; }
-  .nav-links.open a:last-child { border-bottom: none; }
-  .nav-links.open a { font-size: 22px; color: var(--dark); padding: 18px 0; border-bottom: 1px solid var(--border); font-family: 'Playfair Display', serif; }
   .nav-links.open a:last-child { border-bottom: none; }
   .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
   .hamburger span { width: 22px; height: 2px; background: var(--dark); border-radius: 2px; transition: all 0.2s; display: block; }
@@ -315,7 +313,7 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
   .nav-cta { padding: 7px 16px; font-size: 12px; }
 }
 
-  /* ── CLINICIAN DROPDOWN ──────────────────────────────────────── */
+ /* ── CLINICIAN DROPDOWN ──────────────────────────────────────── */
 .nav-clinician-wrap { position: relative; display: inline-flex; align-items: center; }
 .nav-clinician-wrap::after {
   content: ''; position: absolute;
@@ -323,22 +321,19 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
 }
 .nav-clinician-dropdown {
   position: absolute; top: calc(100% + 8px); right: 0; left: auto;
-  transform: none; min-width: 200px;
+  min-width: 200px;
   background: #fff; border: 1px solid var(--border);
   border-radius: 14px; padding: 6px;
   box-shadow: 0 8px 32px rgba(26,46,56,0.12);
-  min-width: 180px; z-index: 200;
+  z-index: 20000;
   opacity: 0; pointer-events: none;
-  transition: opacity 0.18s, transform 0.18s;
+  transition: opacity 0.18s;
 }
 .nav-clinician-wrap:hover .nav-clinician-dropdown {
   opacity: 1; pointer-events: all;
-  transform: none;
-}
 }
 @media (max-width: 900px) {
-  .nav-clinician-dropdown { display: none; }
-  .nav-clinician-wrap:hover .nav-clinician-dropdown { display: none; }
+  .nav-clinician-dropdown { display: none !important; }
 }
 .nav-clinician-dropdown a {
   display: flex; align-items: center; gap: 9px;
