@@ -289,6 +289,7 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
 @media (min-width: 901px) {
   .hamburger { display: none !important; }
 }
+  .mobile-clinician-link { display: none; }
 @media (max-width: 900px) {
   .hero { grid-template-columns: 1fr; padding: 90px 24px 60px; text-align: center; }
   .hero-right { display: none; }
@@ -315,13 +316,13 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
 }
 
   /* ── CLINICIAN DROPDOWN ──────────────────────────────────────── */
-.nav-clinician-wrap { position: static; display: inline-flex; align-items: center; }
+.nav-clinician-wrap { position: relative; display: inline-flex; align-items: center; }
 .nav-clinician-wrap::after {
   content: ''; position: absolute;
   top: 100%; left: 0; right: 0; height: 12px;
 }
 .nav-clinician-dropdown {
-position: fixed; top: 64px; right: 180px; left: auto;
+  position: absolute; top: calc(100% + 8px); right: 0; left: auto;
   transform: none; min-width: 200px;
   background: #fff; border: 1px solid var(--border);
   border-radius: 14px; padding: 6px;
@@ -333,6 +334,7 @@ position: fixed; top: 64px; right: 180px; left: auto;
 .nav-clinician-wrap:hover .nav-clinician-dropdown {
   opacity: 1; pointer-events: all;
   transform: none;
+}
 }
 @media (max-width: 900px) {
   .nav-clinician-dropdown { display: none; }
@@ -364,8 +366,8 @@ position: fixed; top: 64px; right: 180px; left: auto;
     <a href="#how">How it works</a>
     <a href="#approach">The approach</a>
     <a href="#free">Always free</a>
-    <a href="#" onclick="openModal(); return false;" class="mobile-clinician-link" style="display:none;">Clinician Portal</a>
-    <a href="/clinicianguide.html" class="mobile-clinician-link" style="display:none;">Clinician Guide</a>
+<a href="#" onclick="openModal(); return false;" class="mobile-clinician-link">Clinician Portal</a>
+<a href="/clinicianguide.html" class="mobile-clinician-link">Clinician Guide</a>
     <div class="nav-clinician-wrap">
       
       <a href="#" class="nav-clinician" onclick="openModal(); return false;">
