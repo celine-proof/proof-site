@@ -213,56 +213,31 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
 /* ── MOBILE BOTTOM NAV ── */
 .mobile-bottom-nav { display: none; }
 
-/* ── DESKTOP ONLY ── */
-@media (min-width: 901px) {
-  .mobile-bottom-nav { display: none !important; }
-}
-
 /* ── MOBILE ── */
 @media (max-width: 900px) {
-  nav { padding: 16px 24px; }
+  nav { padding: 14px 20px; }
   .nav-links { display: none !important; }
   .nav-clinician-dropdown { display: none !important; }
 
-  .hero { grid-template-columns: 1fr; padding: 90px 24px 60px; text-align: center; }
+  /* show just logo + download button in the top nav on mobile */
+  .nav-mobile-download {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: var(--dark); color: #fff;
+    padding: 8px 16px; border-radius: 100px;
+    font-size: 13px; font-weight: 600; text-decoration: none;
+  }
+
+  .hero { grid-template-columns: 1fr; padding: 80px 24px 48px; text-align: center; }
   .hero-left { align-items: center; }
   .hero-right { display: none; }
-  .hero-body { margin: 0 auto 38px; }
-  .how-grid { grid-template-columns: 1fr; }
+  .hero-body { margin: 0 auto 32px; }
+  .how-grid { grid-template-columns: 1fr; margin-top: 24px; }
   .how-grid-bottom { grid-template-columns: 1fr !important; max-width: 100% !important; }
   .approach-pills-grid { grid-template-columns: 1fr !important; }
-  section { padding: 64px 24px; }
-  .strip { gap: 20px; padding: 22px 24px; }
+  section { padding: 56px 20px; }
+  .strip { gap: 16px; padding: 20px; }
   .strip-div { display: none; }
-  footer { flex-direction: column; padding: 32px 24px; gap: 14px; }
-  body { padding-bottom: 80px; }
-
-  .mobile-bottom-nav {
-    display: flex;
-    position: fixed;
-    bottom: 0; left: 0; right: 0;
-    z-index: 10001;
-    background: rgba(247,244,238,0.97);
-    backdrop-filter: blur(14px);
-    border-top: 1px solid rgba(208,228,236,0.6);
-    padding: 8px 0 max(12px, env(safe-area-inset-bottom));
-    justify-content: space-around;
-    align-items: center;
-  }
-  .mobile-nav-item {
-    display: flex; flex-direction: column; align-items: center; gap: 3px;
-    text-decoration: none; color: var(--muted);
-    font-size: 10px; font-weight: 500;
-    padding: 4px 8px; border-radius: 10px;
-    transition: color 0.2s; min-width: 52px;
-  }
-  .mobile-nav-item:hover { color: var(--terra); }
-  .mobile-nav-item svg { flex-shrink: 0; }
-  .mobile-nav-download {
-    background: var(--dark); color: #fff !important;
-    padding: 8px 12px; border-radius: 14px; margin: 0 4px;
-  }
-  .mobile-nav-download svg { color: #fff; }
+  footer { flex-direction: column; padding: 32px 20px; gap: 14px; }
 }
 </style>
 </head>
