@@ -8,53 +8,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
 <style>
-  /* ── MOBILE BOTTOM NAV ── */
-.mobile-bottom-nav {
-  display: none;
-}
-@media (max-width: 900px) {
-  .mobile-bottom-nav {
-    display: flex;
-    position: fixed;
-    bottom: 0; left: 0; right: 0;
-    z-index: 10001;
-    background: rgba(247,244,238,0.97);
-    backdrop-filter: blur(14px);
-    border-top: 1px solid rgba(208,228,236,0.6);
-    padding: 8px 0 max(12px, env(safe-area-inset-bottom));
-    justify-content: space-around;
-    align-items: center;
-  }
-  .mobile-nav-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3px;
-    text-decoration: none;
-    color: var(--muted);
-    font-size: 10px;
-    font-weight: 500;
-    padding: 4px 8px;
-    border-radius: 10px;
-    transition: color 0.2s;
-    min-width: 52px;
-  }
-  .mobile-nav-item:hover { color: var(--terra); }
-  .mobile-nav-item svg { flex-shrink: 0; }
-  .mobile-nav-download {
-    background: var(--dark);
-    color: #fff !important;
-    padding: 8px 12px;
-    border-radius: 14px;
-    margin: 0 4px;
-  }
-  .mobile-nav-download svg { color: #fff; }
-  /* add padding so content isn't hidden behind bottom nav */
-  body { padding-bottom: 80px; }
-  /* hide old hamburger stuff */
-  .hamburger { display: none !important; }
-  .nav-links { display: none !important; }
-}
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
@@ -72,10 +25,9 @@
 html { scroll-behavior: smooth; }
 body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--dark); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
-/* grain */
 body::after { content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E"); opacity: 1; }
 
-/* ── NAV ─────────────────────────────────────────────────────── */
+/* ── NAV ── */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 10000;
   display: flex; align-items: center; justify-content: space-between;
@@ -89,114 +41,87 @@ nav {
 .nav-links { display: flex; align-items: center; gap: 28px; }
 .nav-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; letter-spacing: 0.1px; }
 .nav-links a:hover { color: var(--dark); }
+.nav-cta { background: var(--dark); color: #fff !important; padding: 9px 22px; border-radius: 100px; font-weight: 500 !important; transition: background 0.2s !important; }
+.nav-cta:hover { background: var(--terra) !important; }
+
+/* ── CLINICIAN DROPDOWN ── */
 .nav-clinician {
   display: inline-flex; align-items: center; gap: 6px;
   background: rgba(58,122,154,0.09); border: 1px solid rgba(58,122,154,0.22);
   border-radius: 100px; padding: 5px 14px 5px 10px;
   font-size: 12px; color: var(--terra); cursor: pointer;
-  transition: background 0.2s; font-weight: 500;
-  text-decoration: none;
+  transition: background 0.2s; font-weight: 500; text-decoration: none;
 }
 .nav-clinician:hover { background: rgba(58,122,154,0.16); }
 .nav-clinician-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--terra); }
-.nav-cta { background: var(--dark); color: #fff !important; padding: 9px 22px; border-radius: 100px; font-weight: 500 !important; transition: background 0.2s !important; }
-.nav-cta:hover { background: var(--terra) !important; }
+.nav-clinician-wrap { position: relative; display: inline-flex; align-items: center; }
+.nav-clinician-wrap::after { content: ''; position: absolute; top: 100%; left: 0; right: 0; height: 12px; }
+.nav-clinician-dropdown {
+  position: absolute; top: calc(100% + 8px); right: 0; left: auto;
+  min-width: 200px; background: #fff; border: 1px solid var(--border);
+  border-radius: 14px; padding: 6px;
+  box-shadow: 0 8px 32px rgba(26,46,56,0.12);
+  z-index: 20000; opacity: 0; pointer-events: none; transition: opacity 0.18s;
+}
+.nav-clinician-wrap:hover .nav-clinician-dropdown { opacity: 1; pointer-events: all; }
+.nav-clinician-dropdown a {
+  display: flex; align-items: center; gap: 9px;
+  padding: 10px 14px; border-radius: 9px;
+  font-size: 13px; color: var(--dark); text-decoration: none; font-weight: 500;
+  transition: background 0.15s;
+}
+.nav-clinician-dropdown a:hover { background: var(--bg); color: var(--terra); }
 
-/* ── HERO ────────────────────────────────────────────────────── */
+/* ── HERO ── */
 .hero {
   min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr;
   align-items: center; gap: 48px;
   padding: 100px 52px 60px; position: relative; overflow: hidden;
 }
-.hero-bg { position: absolute; right: 40px; bottom: 40px; top: auto; transform: none; font-family: 'Playfair Display', serif; font-size: clamp(160px, 22vw, 300px); color: rgba(122,184,200,0.12); letter-spacing: -12px; line-height: 1; pointer-events: none; user-select: none; white-space: nowrap; font-style: italic; }
-
 .hero-left { z-index: 1; display: flex; flex-direction: column; align-items: flex-start; }
-.eyebrow { display: inline-flex; align-items: center; gap: 8px; background: rgba(58,122,154,0.08); border: 1px solid rgba(58,122,154,0.18); border-radius: 100px; padding: 5px 14px; font-size: 11px; color: var(--terra); letter-spacing: 1.8px; text-transform: uppercase; font-weight: 600; margin-bottom: 28px; opacity: 0; animation: up 0.8s ease 0.1s forwards; }
-.eyebrow-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--terra); }
-
 h1.hero-h1 { font-family: 'Playfair Display', serif; font-size: clamp(44px, 5.5vw, 74px); line-height: 1.07; letter-spacing: -2px; color: var(--dark); margin-bottom: 26px; opacity: 0; animation: up 0.8s ease 0.2s forwards; }
 h1.hero-h1 em { font-style: italic; color: var(--terra); }
-
 .hero-body { font-family: 'Lora', serif; font-size: 17px; line-height: 1.78; color: #4A6A78; max-width: 460px; margin-bottom: 38px; opacity: 0; animation: up 0.8s ease 0.32s forwards; }
-
 .hero-actions { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; opacity: 0; animation: up 0.8s ease 0.44s forwards; justify-content: flex-start; }
 .btn-primary { display: inline-flex; align-items: center; gap: 9px; background: var(--dark); color: #fff; padding: 14px 28px; border-radius: 14px; font-size: 14px; font-weight: 600; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 24px rgba(26,46,56,0.18); }
 .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(26,46,56,0.24); }
 .hero-note { margin-top: 20px; font-size: 12px; color: var(--muted); font-style: italic; opacity: 0; animation: up 0.8s ease 0.54s forwards; }
 
-/* phone */
+/* ── PHONE MOCKUP ── */
 .phone-wrap { position: relative; display: flex; justify-content: center; align-items: center; }
-.phone-glow { position: absolute; width: 220px; height: 220px; background: radial-gradient(circle, rgba(122,184,200,0.2) 0%, transparent 70%); bottom: -40px; left: 50%; transform: translateX(-50%); pointer-events: none; }
 .phone-shell {
   width: 244px; height: 526px;
   background: linear-gradient(160deg, #1a1a1a 0%, #0d0d0d 40%, #080808 100%);
-  border-radius: 54px;
-  padding: 10px;
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,0.08),
-    0 0 0 2px rgba(0,0,0,0.6),
-    inset 0 0 0 1px rgba(255,255,255,0.04),
-    0 40px 100px rgba(0,0,0,0.5),
-    0 8px 24px rgba(0,0,0,0.3);
+  border-radius: 54px; padding: 10px;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.08), 0 0 0 2px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255,255,255,0.04), 0 40px 100px rgba(0,0,0,0.5), 0 8px 24px rgba(0,0,0,0.3);
   position: relative;
 }
-/* physical buttons */
-.phone-btn-vol-up { position: absolute; left: -3px; top: 100px; width: 3px; height: 28px; background: linear-gradient(90deg, #080808, #141414); border-radius: 2px 0 0 2px; box-shadow: -1px 0 2px rgba(0,0,0,0.6); }
-.phone-btn-vol-down { position: absolute; left: -3px; top: 138px; width: 3px; height: 28px; background: linear-gradient(90deg, #080808, #141414); border-radius: 2px 0 0 2px; box-shadow: -1px 0 2px rgba(0,0,0,0.6); }
-.phone-btn-power { position: absolute; right: -3px; top: 118px; width: 3px; height: 44px; background: linear-gradient(270deg, #080808, #141414); border-radius: 0 2px 2px 0; box-shadow: 1px 0 2px rgba(0,0,0,0.6); }
-.phone-inner {
-  width: 100%; height: 100%;
-  background: #050505;
-  border-radius: 46px;
-  overflow: hidden;
-  position: relative;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
-}
+.phone-btn-vol-up { position: absolute; left: -3px; top: 100px; width: 3px; height: 28px; background: linear-gradient(90deg, #080808, #141414); border-radius: 2px 0 0 2px; }
+.phone-btn-vol-down { position: absolute; left: -3px; top: 138px; width: 3px; height: 28px; background: linear-gradient(90deg, #080808, #141414); border-radius: 2px 0 0 2px; }
+.phone-btn-power { position: absolute; right: -3px; top: 118px; width: 3px; height: 44px; background: linear-gradient(270deg, #080808, #141414); border-radius: 0 2px 2px 0; }
+.phone-inner { width: 100%; height: 100%; background: #050505; border-radius: 46px; overflow: hidden; position: relative; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05); }
 .phone-screen { width: 100%; height: 100%; background: var(--dark); border-radius: 40px; overflow: hidden; display: flex; flex-direction: column; }
-
-/* status bar */
-.ps-status { display: flex; align-items: center; justify-content: space-between; padding: 8px 20px 0; background: var(--dark); margin-top: -1px; }
+.ps-status { display: flex; align-items: center; justify-content: space-between; padding: 8px 20px 0; background: var(--dark); }
 .ps-time { font-size: 11px; font-weight: 600; color: #fff; letter-spacing: -0.3px; }
 .ps-icons { display: flex; align-items: center; gap: 5px; }
-
-/* dynamic island */
 .ps-island { width: 94px; height: 28px; background: #0d1519; border-radius: 22px; margin: 4px auto 0; position: relative; z-index: 2; }
-
-/* header */
 .ps-header { background: var(--dark); padding: 10px 16px 14px; display: flex; align-items: center; justify-content: space-between; }
 .ps-logo { font-family: 'Playfair Display', serif; font-size: 18px; color: #fff; line-height: 1; }
 .ps-logo span { color: var(--sage); }
 .ps-greeting { font-size: 9px; color: rgba(122,184,200,0.5); margin-top: 2px; }
 .ps-settings-btn { width: 26px; height: 26px; border-radius: 8px; background: rgba(122,184,200,0.08); display: flex; align-items: center; justify-content: center; }
-
-/* wave banner */
 .ps-wave-banner { background: var(--dark); margin-top: -1px; }
-
-/* body */
 .ps-body { padding: 10px; flex: 1; display: flex; flex-direction: column; gap: 7px; overflow: hidden; background: var(--bg); }
 .ps-card { background: #fff; border-radius: 14px; padding: 10px 12px; border: 1px solid var(--border); }
-.ps-card-primary { border-color: rgba(58,122,154,0.2); }
-.ps-card-sand { background: #F5EDD6; border-color: #C4A870; }
-.ps-card-pill { display: inline-block; background: var(--warm); border-radius: 20px; padding: 2px 8px; font-size: 7px; font-weight: 700; color: var(--terra); letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 5px; }
-.ps-card-title { font-size: 11px; font-weight: 600; color: var(--dark); margin-bottom: 2px; }
-.ps-card-sub { font-size: 8.5px; color: var(--muted); line-height: 1.4; margin-bottom: 8px; }
-.ps-cta-btn { background: var(--terra); color: #fff; border-radius: 8px; padding: 6px 10px; font-size: 9px; font-weight: 600; display: inline-block; }
 .ps-wave-label { font-size: 7.5px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
 
-/* tab bar */
-.ps-tabs { background: #fff; border-top: 1px solid var(--border); padding: 8px 4px 2px; display: flex; }
-.ps-tab { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; }
-.ps-tab span { font-size: 7px; color: rgba(106,154,170,0.5); }
-.ps-tab-active span { color: var(--terra); font-weight: 600; }
-.ps-home-bar { height: 18px; background: #fff; display: flex; align-items: center; justify-content: center; }
-.ps-home-bar::after { content: ''; width: 90px; height: 4px; background: var(--dark); border-radius: 3px; opacity: 0.15; }
-/* ── STRIP ───────────────────────────────────────────────────── */
+/* ── STRIP ── */
 .strip { background: var(--dark); padding: 26px 52px; display: flex; align-items: center; justify-content: center; gap: 52px; flex-wrap: wrap; }
 .strip-item { display: flex; align-items: center; gap: 9px; font-size: 12px; color: rgba(200,223,232,0.5); }
 .strip-item svg { color: var(--sage); width: 15px; height: 15px; flex-shrink: 0; }
 .strip-div { width: 1px; height: 18px; background: rgba(122,184,200,0.14); }
 
-/* ── SECTIONS ────────────────────────────────────────────────── */
+/* ── SECTIONS ── */
 section { padding: 96px 52px; }
 #how { padding-bottom: 80px; }
 .sec-eyebrow { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--terra); font-weight: 600; margin-bottom: 12px; }
@@ -210,7 +135,6 @@ section { padding: 96px 52px; }
 .how-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--sage), var(--terra)); opacity: 0; transition: opacity 0.2s; }
 .how-card:hover { transform: translateY(-4px); box-shadow: 0 12px 44px rgba(26,46,56,0.09); }
 .how-card:hover::before { opacity: 1; }
-.how-num { font-family: 'Playfair Display', serif; font-size: 52px; color: rgba(122,184,200,0.18); font-style: italic; line-height: 1; margin-bottom: 14px; }
 .how-title { font-size: 15px; font-weight: 600; color: var(--dark); margin-bottom: 9px; }
 .how-body { font-size: 13px; color: var(--muted); line-height: 1.72; }
 
@@ -220,24 +144,11 @@ section { padding: 96px 52px; }
 .approach .sec-h2 { color: #F7F4EE; }
 .approach .sec-body { color: rgba(200,223,232,0.5); }
 .approach .sec-eyebrow { color: var(--sage); }
-.sci-grid { display: grid; grid-template-columns: 3fr 1fr; gap: 48px; margin-top: 56px; align-items: start; }
 .sci-pill { background: rgba(122,184,200,0.09); border: 1px solid rgba(122,184,200,0.18); border-radius: 12px; padding: 18px 22px; margin-bottom: 14px; }
 .sci-pill-label { font-size: 9px; letter-spacing: 1.8px; text-transform: uppercase; color: var(--sage); margin-bottom: 6px; }
 .sci-pill-text { font-size: 14px; color: rgba(247,244,238,0.8); line-height: 1.6; }
-.sci-quote { background: rgba(122,184,200,0.06); border-left: 2px solid var(--sage); padding: 24px 28px; border-radius: 0 14px 14px 0; }
-.sci-quote blockquote { font-family: 'Lora', serif; font-style: italic; font-size: 18px; color: rgba(247,244,238,0.8); line-height: 1.65; margin-bottom: 12px; }
-.sci-quote cite { font-size: 11px; color: rgba(122,184,200,0.45); font-style: normal; }
-.sci-disclaimer { margin-top: 20px; padding: 16px 18px; background: rgba(196,112,96,0.07); border: 1px solid rgba(196,112,96,0.14); border-radius: 12px; }
 .sci-disclaimer-label { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(232,137,106,0.6); margin-bottom: 6px; }
 .sci-disclaimer-text { font-size: 12px; color: rgba(200,223,232,0.4); line-height: 1.6; }
-
-/* testimonial */
-.testimonial { background: var(--warm); text-align: center; }
-.testimonial-inner { max-width: 680px; margin: 0 auto; }
-.quote-mark { font-family: 'Playfair Display', serif; font-size: 80px; color: rgba(122,184,200,0.2); line-height: 0.6; display: block; margin-bottom: 20px; }
-.testimonial blockquote { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(20px, 2.8vw, 32px); line-height: 1.42; color: var(--dark); letter-spacing: -0.5px; margin-bottom: 24px; }
-.testimonial blockquote em { color: var(--terra); font-style: normal; }
-.testimonial cite { font-size: 13px; color: var(--muted); font-style: normal; }
 
 /* free */
 .free { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; max-width: 620px; margin: 0 auto; }
@@ -248,13 +159,6 @@ section { padding: 96px 52px; }
 .free-check svg { width: 14px; height: 14px; color: var(--terra); }
 .free-item-title { font-size: 15px; font-weight: 600; color: var(--dark); margin-bottom: 6px; }
 .free-item-sub { font-size: 13px; color: var(--muted); line-height: 1.7; }
-.cost-card { background: var(--dark); border-radius: 24px; padding: 36px; text-align: center; }
-.cost-amount { font-family: 'Playfair Display', serif; font-size: 80px; color: #fff; line-height: 1; margin-bottom: 6px; }
-.cost-label { font-size: 14px; color: rgba(200,223,232,0.45); margin-bottom: 28px; }
-.cost-divider { height: 1px; background: rgba(122,184,200,0.1); margin-bottom: 22px; }
-.cost-note { font-family: 'Lora', serif; font-style: italic; font-size: 15px; color: rgba(200,223,232,0.6); line-height: 1.65; margin-bottom: 28px; }
-.btn-light { display: inline-flex; align-items: center; gap: 9px; background: #F7F4EE; color: var(--dark); padding: 14px 28px; border-radius: 14px; font-size: 14px; font-weight: 600; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.15); width: 100%; justify-content: center; }
-.btn-light:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.2); }
 
 /* cta */
 .cta-section { background: var(--dark); text-align: center; position: relative; overflow: hidden; }
@@ -276,8 +180,8 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
 .footer-links a:hover { color: rgba(122,184,200,0.55); }
 .footer-copy { font-size: 11px; color: rgba(122,184,200,0.18); }
 
-/* ── CLINICIAN MODAL ─────────────────────────────────────────── */
-.modal-overlay { position: fixed; inset: 0; z-index: 500; background: rgba(18,30,38,0.6); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: 24px; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+/* ── CLINICIAN MODAL ── */
+.modal-overlay { position: fixed; inset: 0; z-index: 50000; background: rgba(18,30,38,0.6); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: 24px; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
 .modal-overlay.open { opacity: 1; pointer-events: all; }
 .modal { background: #fff; border-radius: 24px; padding: 40px; width: 100%; max-width: 420px; box-shadow: 0 28px 80px rgba(18,30,38,0.22); position: relative; transform: translateY(16px); transition: transform 0.25s; }
 .modal-overlay.open .modal { transform: translateY(0); }
@@ -297,113 +201,80 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
 .form-input::placeholder { color: rgba(106,154,170,0.5); }
 .form-btn { background: var(--terra); color: #fff; border: none; border-radius: 10px; padding: 13px; font-size: 14px; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: background 0.2s; margin-top: 2px; }
 .form-btn:hover { background: #2d6685; }
-.form-divider { display: flex; align-items: center; gap: 10px; }
-.form-divider-line { flex: 1; height: 1px; background: var(--border); }
-.form-divider-text { font-size: 11px; color: var(--muted); }
 .form-footer { text-align: center; font-size: 11px; color: var(--muted); margin-top: 4px; }
 .form-footer a { color: var(--terra); text-decoration: none; }
 .form-select { border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; font-size: 13px; color: var(--dark); font-family: 'DM Sans', sans-serif; background: var(--bg); outline: none; appearance: none; }
 
-/* scroll reveal */
+/* ── ANIMATIONS ── */
 @keyframes up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.65s ease, transform 0.65s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
-.no-js .reveal { opacity: 1; transform: none; }
-/* responsive */
-  .hamburger { display: none; }
+
+/* ── MOBILE BOTTOM NAV ── */
+.mobile-bottom-nav { display: none; }
+
+/* ── DESKTOP ONLY ── */
+@media (min-width: 901px) {
+  .mobile-bottom-nav { display: none !important; }
+}
+
+/* ── MOBILE ── */
 @media (max-width: 900px) {
   nav { padding: 16px 24px; }
-  .nav-links { display: none !important; visibility: hidden; }
-.nav-links.open { display: flex !important; visibility: visible; flex-direction: column; position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; background: var(--bg); z-index: 10000; padding: 0; gap: 0; justify-content: flex-start; overflow-y: scroll; -webkit-overflow-scrolling: touch; }
-.nav-menu-header { display: none !important; }
-  .nav-links.open .nav-menu-header { display: flex !important; align-items: center; justify-content: space-between; padding: 24px 24px 20px; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--bg); z-index: 2; min-height: 70px; }
-  .nav-menu-header-logo { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--dark); }
-  .nav-menu-header-logo span { color: var(--terra); }
-  .nav-close { width: 36px; height: 36px; border-radius: 50%; background: rgba(208,228,236,0.4); border: none; font-size: 18px; color: var(--dark); cursor: pointer; display: flex; align-items: center; justify-content: center; }
- .nav-links.open a { font-size: 22px; color: var(--dark); padding: 20px 24px; border-bottom: 1px solid var(--border); font-family: 'Playfair Display', serif; display: block; width: 100%; }
-  .nav-links.open .mobile-clinician-link { display: block !important; }
-  .nav-links.open .nav-clinician-wrap { display: none !important; }
-  .nav-links.open a:last-child { border-bottom: none; }
-  .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
-  .hamburger span { width: 22px; height: 2px; background: var(--dark); border-radius: 2px; transition: all 0.2s; display: block; }
-  .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-  .hamburger.open span:nth-child(2) { opacity: 0; }
-  .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-  .nav-clinician-dropdown { display: none; }
-}
-@media (min-width: 901px) {
-  .hamburger { display: none !important; }
-}
-  .mobile-clinician-link { display: none; }
-@media (max-width: 900px) {
+  .nav-links { display: none !important; }
+  .nav-clinician-dropdown { display: none !important; }
+
   .hero { grid-template-columns: 1fr; padding: 90px 24px 60px; text-align: center; }
+  .hero-left { align-items: center; }
   .hero-right { display: none; }
   .hero-body { margin: 0 auto 38px; }
   .how-grid { grid-template-columns: 1fr; }
-  .sci-grid { grid-template-columns: 1fr; }
-  .free { grid-template-columns: 1fr; gap: 40px; }
+  .how-grid-bottom { grid-template-columns: 1fr !important; max-width: 100% !important; }
+  .approach-pills-grid { grid-template-columns: 1fr !important; }
   section { padding: 64px 24px; }
   .strip { gap: 20px; padding: 22px 24px; }
   .strip-div { display: none; }
   footer { flex-direction: column; padding: 32px 24px; gap: 14px; }
-  .approach-pills-grid { grid-template-columns: 1fr !important; }
-  .how-grid-bottom { grid-template-columns: 1fr !important; max-width: 100% !important; }
-  .fit-grid { grid-template-columns: 1fr; gap: 32px; }
-  .summary-grid { grid-template-columns: 1fr; gap: 32px; }
-  .disc-grid { grid-template-columns: 1fr; gap: 16px; }
-  .features-grid { grid-template-columns: 1fr; }
-  .steps-grid { grid-template-columns: 1fr; }
-  .step { border-right: none; border-bottom: 1px solid var(--border); }
-  .step:last-child { border-bottom: none; }
-  .nav-clinician-wrap { display: none; }
-  .mobile-clinician-link { display: block !important; }
-  .nav-cta { padding: 7px 16px; font-size: 12px; }
-}
+  body { padding-bottom: 80px; }
 
- /* ── CLINICIAN DROPDOWN ──────────────────────────────────────── */
-.nav-clinician-wrap { position: relative; display: inline-flex; align-items: center; }
-.nav-clinician-wrap::after {
-  content: ''; position: absolute;
-  top: 100%; left: 0; right: 0; height: 12px;
+  .mobile-bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 10001;
+    background: rgba(247,244,238,0.97);
+    backdrop-filter: blur(14px);
+    border-top: 1px solid rgba(208,228,236,0.6);
+    padding: 8px 0 max(12px, env(safe-area-inset-bottom));
+    justify-content: space-around;
+    align-items: center;
+  }
+  .mobile-nav-item {
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    text-decoration: none; color: var(--muted);
+    font-size: 10px; font-weight: 500;
+    padding: 4px 8px; border-radius: 10px;
+    transition: color 0.2s; min-width: 52px;
+  }
+  .mobile-nav-item:hover { color: var(--terra); }
+  .mobile-nav-item svg { flex-shrink: 0; }
+  .mobile-nav-download {
+    background: var(--dark); color: #fff !important;
+    padding: 8px 12px; border-radius: 14px; margin: 0 4px;
+  }
+  .mobile-nav-download svg { color: #fff; }
 }
-.nav-clinician-dropdown {
-  position: absolute; top: calc(100% + 8px); right: 0; left: auto;
-  min-width: 200px;
-  background: #fff; border: 1px solid var(--border);
-  border-radius: 14px; padding: 6px;
-  box-shadow: 0 8px 32px rgba(26,46,56,0.12);
-  z-index: 20000;
-  opacity: 0; pointer-events: none;
-  transition: opacity 0.18s;
-}
-.nav-clinician-wrap:hover .nav-clinician-dropdown {
-  opacity: 1; pointer-events: all;
-}
-@media (max-width: 900px) {
-  .nav-clinician-dropdown { display: none !important; }
-}
-.nav-clinician-dropdown a {
-  display: flex; align-items: center; gap: 9px;
-  padding: 10px 14px; border-radius: 9px;
-  font-size: 13px; color: var(--dark);
-  text-decoration: none; font-weight: 500;
-  transition: background 0.15s;
-}
-.nav-clinician-dropdown a:hover { background: var(--bg); color: var(--terra); }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- NAV (desktop only) -->
 <nav>
   <a href="#" class="nav-logo">proof<span>.</span></a>
-  
-<div class="nav-links" id="navLinks">
+  <div class="nav-links">
     <a href="#how">How it works</a>
     <a href="#approach">The approach</a>
     <a href="#free">Always free</a>
-    <a href="#" onclick="openModal(); return false;" class="mobile-clinician-link">Clinician Portal</a>
-    <a href="/clinicianguide.html" class="mobile-clinician-link">Clinician Guide</a>
     <div class="nav-clinician-wrap">
       <a href="#" class="nav-clinician" onclick="openModal(); return false;">
         <div class="nav-clinician-dot"></div>
@@ -422,9 +293,8 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
       </div>
     </div>
     <a href="#" class="nav-cta">Download</a>
-</div>
-
-
+  </div>
+</nav>
 
 <!-- HERO -->
 <section class="hero">
@@ -439,16 +309,14 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
     </div>
     <p class="hero-note">Free for patients. Always. Used alongside treatment, never instead of it.</p>
   </div>
-<div class="hero-right">
+  <div class="hero-right">
     <div class="phone-wrap">
       <div class="phone-shell">
-        <!-- side buttons -->
         <div class="phone-btn-vol-up"></div>
         <div class="phone-btn-vol-down"></div>
         <div class="phone-btn-power"></div>
         <div class="phone-inner">
           <div class="phone-screen">
-           <!-- status bar -->
             <div class="ps-status" style="background:var(--dark);padding-top:12px;">
               <span class="ps-time">9:41</span>
               <div class="ps-icons">
@@ -457,51 +325,23 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
                 <div style="display:flex;align-items:center;gap:1px"><div style="width:18px;height:9px;border:1.2px solid rgba(255,255,255,0.5);border-radius:2px;padding:1.5px"><div style="width:70%;height:100%;background:rgba(255,255,255,0.7);border-radius:1px"></div></div><div style="width:2px;height:5px;background:rgba(255,255,255,0.4);border-radius:0 1px 1px 0"></div></div>
               </div>
             </div>
-        <!-- dynamic island -->
             <div class="ps-island" style="margin-top:2px;"></div>
-            <!-- header -->
             <div class="ps-header">
               <div>
                 <div class="ps-logo">proof<span>.</span></div>
-                <div class="ps-greeting">hi, Maya </div>
+                <div class="ps-greeting">hi, Maya</div>
               </div>
               <div class="ps-settings-btn">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(122,184,200,0.6)" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
               </div>
             </div>
-            <!-- wave banner -->
             <div class="ps-wave-banner">
               <svg width="100%" height="36" viewBox="0 0 228 36" preserveAspectRatio="none">
                 <path d="M0,18 C38,6 76,28 114,16 C152,4 190,22 228,14 L228,36 L0,36 Z" fill="rgba(58,122,154,0.3)"/>
                 <path d="M0,22 C48,10 96,30 144,18 C180,8 210,24 228,18 L228,36 L0,36 Z" fill="rgba(122,184,200,0.15)"/>
               </svg>
             </div>
-            <!-- Mobile bottom nav -->
-<nav class="mobile-bottom-nav">
-  <a href="#how" class="mobile-nav-item">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-    <span>How it works</span>
-  </a>
-  <a href="#approach" class="mobile-nav-item">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-    <span>Approach</span>
-  </a>
-  <a href="#" class="mobile-nav-item mobile-nav-download">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-    <span>Download</span>
-  </a>
-  <a href="#free" class="mobile-nav-item">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="20 6 9 17 4 12"/></svg>
-    <span>Free</span>
-  </a>
-  <a href="#" onclick="openModal(); return false;" class="mobile-nav-item">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-    <span>Clinicians</span>
-  </a>
-</nav>
-            <!-- body -->
-           <div class="ps-body">
-              <!-- widget row 1 -->
+            <div class="ps-body">
               <div style="display:flex;gap:6px;margin-bottom:6px;">
                 <div style="flex:1;background:#fff;border-radius:12px;padding:10px;border:1px solid var(--border);">
                   <div style="width:24px;height:24px;border-radius:7px;background:rgba(58,122,154,0.1);display:flex;align-items:center;justify-content:center;margin-bottom:6px;">
@@ -511,14 +351,13 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
                   <div style="font-size:8px;color:#6A9AAA;">Before, during, or after</div>
                 </div>
                 <div style="flex:1;background:#E8D5A8;border-radius:12px;padding:10px;border:1px solid #C4A870;">
-                 <div style="width:24px;height:24px;border-radius:7px;background:rgba(196,168,112,0.25);display:flex;align-items:center;justify-content:center;margin-bottom:6px;">
+                  <div style="width:24px;height:24px;border-radius:7px;background:rgba(196,168,112,0.25);display:flex;align-items:center;justify-content:center;margin-bottom:6px;">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#6A4F1A" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
                   </div>
                   <div style="font-size:10px;font-weight:600;color:#3A2A10;margin-bottom:2px;">Body check-in</div>
                   <div style="font-size:8px;color:#8A6A30;">A quick pause</div>
                 </div>
               </div>
-              <!-- widget row 2 -->
               <div style="display:flex;gap:6px;margin-bottom:6px;">
                 <div style="flex:1;background:#1A2E38;border-radius:12px;padding:10px;">
                   <div style="width:24px;height:24px;border-radius:7px;background:rgba(122,184,200,0.15);display:flex;align-items:center;justify-content:center;margin-bottom:6px;">
@@ -535,12 +374,11 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
                   <div style="font-size:8px;color:#6A9AAA;">12 meals logged</div>
                 </div>
               </div>
-              <!-- distress wave card -->
               <div class="ps-card">
                 <div class="ps-wave-label">Distress wave · Dinner</div>
                 <svg width="100%" height="40" viewBox="0 0 190 40">
                   <defs><linearGradient id="wg" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#7AB8C8" stop-opacity="0.3"/><stop offset="100%" stop-color="#3A7A9A" stop-opacity="0.1"/></linearGradient></defs>
-                 <path d="M10,14 C30,12 50,8 80,10 C105,12 130,32 160,28 L160,40 L10,40 Z" fill="url(#wg)"/>
+                  <path d="M10,14 C30,12 50,8 80,10 C105,12 130,32 160,28 L160,40 L10,40 Z" fill="url(#wg)"/>
                   <path d="M10,14 C30,12 50,8 80,10 C105,12 130,32 160,28" fill="none" stroke="#3A7A9A" stroke-width="1.8" stroke-linecap="round"/>
                   <circle cx="10" cy="14" r="3" fill="#3A7A9A"/>
                   <circle cx="80" cy="10" r="3" fill="#3A7A9A"/>
@@ -592,7 +430,7 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
     <h2 class="sec-h2">Every meal logged<br>becomes <em>evidence.</em></h2>
     <p class="sec-body">proof. builds a personal archive of every time distress rose and fell — so patients can see their own survival, in their own words.</p>
   </div>
-<div class="how-grid" style="margin-top: 32px;">
+  <div class="how-grid" style="margin-top: 32px;">
     <div class="how-card reveal">
       <div class="how-title">Log the meal</div>
       <div class="how-body">Get support before, during, or after a meal — wherever you are in the moment. Check in with your emotions, write a kind thought, and build your evidence one meal at a time.</div>
@@ -606,7 +444,7 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
       <div class="how-body">Five evidence-based tools — grounding, urge surfing, self-compassion, body scan, thought defusion — available in the hardest moments.</div>
     </div>
   </div>
- <div class="how-grid how-grid-bottom" style="grid-template-columns: repeat(2, 1fr); max-width: 66%; margin-top: 20px; margin-left: auto; margin-right: auto;">
+  <div class="how-grid how-grid-bottom" style="grid-template-columns: repeat(2, 1fr); max-width: 66%; margin-top: 20px; margin-left: auto; margin-right: auto;">
     <div class="how-card reveal">
       <div class="how-title">Check in to your body</div>
       <div class="how-body">Moment check-ins capture body tension, emotion, and a kind thought — independent of meals. Builds interoceptive awareness over time.</div>
@@ -616,14 +454,15 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
       <div class="how-body">Generate a therapist summary — every logged meal, distress arc, and reappraisal — ready to share before a session.</div>
     </div>
   </div>
+</section>
 
 <section id="approach" class="approach">
-<div class="reveal">
+  <div class="reveal">
     <div class="sec-eyebrow">The approach</div>
     <h2 class="sec-h2">Built on what<br><em>actually works.</em></h2>
     <p class="sec-body">proof. is built on the mechanisms that actually change eating disorder behaviors — not affirmations, not rules, not numbers.</p>
   </div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:36px;" class="reveal approach-pills-grid">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:36px;" class="reveal approach-pills-grid">
     <div class="sci-pill">
       <div class="sci-pill-label">Exposure & Response Prevention</div>
       <div class="sci-pill-text">The gold standard for anxiety-driven restriction. proof. operationalises ERP by logging distress before, during, and after every meal — creating repeated evidence that the feared outcome does not occur.</div>
@@ -651,15 +490,13 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
   </div>
 </section>
 
-
-
 <!-- FREE -->
 <section id="free">
   <div class="free">
     <div class="reveal">
-   <div class="sec-eyebrow">Always free</div>
+      <div class="sec-eyebrow">Always free</div>
       <h2 class="sec-h2" style="margin-bottom: 16px;">Free for every<br><em>patient.</em></h2>
-     <p class="sec-body">Eating disorders disproportionately affect people who can't access care. proof. will never charge patients.</p>
+      <p class="sec-body">Eating disorders disproportionately affect people who can't access care. proof. will never charge patients.</p>
       <div class="free-list">
         <div class="free-item">
           <div class="free-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
@@ -685,16 +522,16 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
 <!-- CTA -->
 <section class="cta-section">
   <div style="position:relative;z-index:1;">
-   <div class="sec-eyebrow reveal">proof. is waiting for you.</div>
-<h2 class="sec-h2 reveal" style="color:#F7F4EE;text-align:center;">You don't have to<br>do this <em style="color:var(--sage)">alone.</em></h2>
-<div class="cta-buttons reveal" style="margin-top: 32px;">
-  <a href="#" class="btn-primary">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-    Download on iOS
-  </a>
-  <a href="mailto:celine@proofrecoveryapp.com" class="btn-outline">Get in touch</a>
-</div>
-<p class="cta-note reveal">Free for every patient. Used alongside treatment, never instead of it.</p>
+    <div class="sec-eyebrow reveal">proof. is waiting for you.</div>
+    <h2 class="sec-h2 reveal" style="color:#F7F4EE;text-align:center;">You don't have to<br>do this <em style="color:var(--sage)">alone.</em></h2>
+    <div class="cta-buttons reveal" style="margin-top: 32px;">
+      <a href="#" class="btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Download on iOS
+      </a>
+      <a href="mailto:celine@proofrecoveryapp.com" class="btn-outline">Get in touch</a>
+    </div>
+    <p class="cta-note reveal">Free for every patient. Used alongside treatment, never instead of it.</p>
   </div>
 </section>
 
@@ -703,13 +540,37 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
   <div class="footer-logo">proof<span>.</span></div>
   <div class="footer-links">
     <a href="/privacy.html">Privacy Policy</a>
-<a href="/terms.html">Terms of Use</a>
-<a href="/disclaimer.html">Medical Disclaimer</a>
-<a href="/security.html">Security</a>
-<a href="mailto:celine@proofrecoveryapp.com">Contact</a>
+    <a href="/terms.html">Terms of Use</a>
+    <a href="/disclaimer.html">Medical Disclaimer</a>
+    <a href="/security.html">Security</a>
+    <a href="mailto:celine@proofrecoveryapp.com">Contact</a>
   </div>
   <div class="footer-copy">© 2026 Proof Health Technologies LLC · Boston, MA</div>
 </footer>
+
+<!-- MOBILE BOTTOM NAV -->
+<nav class="mobile-bottom-nav">
+  <a href="#how" class="mobile-nav-item">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+    <span>How it works</span>
+  </a>
+  <a href="#approach" class="mobile-nav-item">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+    <span>Approach</span>
+  </a>
+  <a href="#" class="mobile-nav-item mobile-nav-download">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+    <span>Download</span>
+  </a>
+  <a href="#free" class="mobile-nav-item">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="20 6 9 17 4 12"/></svg>
+    <span>Free</span>
+  </a>
+  <a href="#" onclick="openModal(); return false;" class="mobile-nav-item">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+    <span>Clinicians</span>
+  </a>
+</nav>
 
 <!-- CLINICIAN MODAL -->
 <div class="modal-overlay" id="clinicianModal" onclick="handleOverlayClick(event)">
@@ -717,13 +578,10 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
     <button class="modal-close" onclick="closeModal()">✕</button>
     <div class="modal-logo">proof<span>.</span> <span style="font-family:'DM Sans';font-size:13px;color:var(--muted);font-weight:400;">for clinicians</span></div>
     <div class="modal-subtitle" id="modal-subtitle">Sign in to access your clinician dashboard, or request access to get started.</div>
-
     <div class="modal-tabs">
       <button class="modal-tab active" id="tab-login" onclick="switchTab('login')">Sign in</button>
       <button class="modal-tab" id="tab-request" onclick="switchTab('request')">Request access</button>
     </div>
-
-    <!-- LOGIN FORM -->
     <div class="modal-form" id="form-login">
       <div class="form-group">
         <label class="form-label">Email address</label>
@@ -736,8 +594,6 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
       <button class="form-btn">Sign in →</button>
       <div class="form-footer"><a href="#">Forgot password?</a></div>
     </div>
-
-    <!-- REQUEST FORM -->
     <div class="modal-form" id="form-request" style="display:none;">
       <div class="form-group">
         <label class="form-label">Full name</label>
@@ -780,11 +636,8 @@ try {
 }
 
 const clinicianParam = new URLSearchParams(window.location.search).get('clinician');
-if (clinicianParam === 'login') {
-  setTimeout(() => openModal(), 100);
-} else if (clinicianParam === 'request') {
-  setTimeout(() => { openModal(); switchTab('request'); }, 100);
-}
+if (clinicianParam === 'login') setTimeout(() => openModal(), 100);
+else if (clinicianParam === 'request') setTimeout(() => { openModal(); switchTab('request'); }, 100);
 
 function openModal() {
   document.getElementById('clinicianModal').classList.add('open');
