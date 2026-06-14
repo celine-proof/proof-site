@@ -8,6 +8,53 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
 <style>
+  /* ── MOBILE BOTTOM NAV ── */
+.mobile-bottom-nav {
+  display: none;
+}
+@media (max-width: 900px) {
+  .mobile-bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 10001;
+    background: rgba(247,244,238,0.97);
+    backdrop-filter: blur(14px);
+    border-top: 1px solid rgba(208,228,236,0.6);
+    padding: 8px 0 max(12px, env(safe-area-inset-bottom));
+    justify-content: space-around;
+    align-items: center;
+  }
+  .mobile-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 10px;
+    transition: color 0.2s;
+    min-width: 52px;
+  }
+  .mobile-nav-item:hover { color: var(--terra); }
+  .mobile-nav-item svg { flex-shrink: 0; }
+  .mobile-nav-download {
+    background: var(--dark);
+    color: #fff !important;
+    padding: 8px 12px;
+    border-radius: 14px;
+    margin: 0 4px;
+  }
+  .mobile-nav-download svg { color: #fff; }
+  /* add padding so content isn't hidden behind bottom nav */
+  body { padding-bottom: 80px; }
+  /* hide old hamburger stuff */
+  .hamburger { display: none !important; }
+  .nav-links { display: none !important; }
+}
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
@@ -350,9 +397,7 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">proof<span>.</span></a>
-  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
-  </div>
+  
 <div class="nav-links" id="navLinks">
     <a href="#how">How it works</a>
     <a href="#approach">The approach</a>
@@ -379,20 +424,7 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
     <a href="#" class="nav-cta">Download</a>
 </div>
 
-<!-- Mobile menu overlay (separate from nav-links) -->
-<div id="mobileMenu" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:var(--bg); z-index:10001; flex-direction:column; overflow-y:scroll; -webkit-overflow-scrolling:touch;">
-  <div style="display:flex; align-items:center; justify-content:space-between; padding:24px; border-bottom:1px solid var(--border); position:sticky; top:0; background:var(--bg);">
-    <div style="font-family:'Playfair Display',serif; font-size:20px; color:var(--dark);">proof<span style="color:var(--terra);">.</span></div>
-    <button onclick="toggleMenu()" style="width:36px;height:36px;border-radius:50%;background:rgba(208,228,236,0.4);border:none;font-size:18px;color:var(--dark);cursor:pointer;display:flex;align-items:center;justify-content:center;">✕</button>
-  </div>
-  <a href="#how" onclick="toggleMenu()" style="font-size:22px;color:var(--dark);padding:20px 24px;border-bottom:1px solid var(--border);font-family:'Playfair Display',serif;text-decoration:none;display:block;">How it works</a>
-  <a href="#approach" onclick="toggleMenu()" style="font-size:22px;color:var(--dark);padding:20px 24px;border-bottom:1px solid var(--border);font-family:'Playfair Display',serif;text-decoration:none;display:block;">The approach</a>
-  <a href="#free" onclick="toggleMenu()" style="font-size:22px;color:var(--dark);padding:20px 24px;border-bottom:1px solid var(--border);font-family:'Playfair Display',serif;text-decoration:none;display:block;">Always free</a>
-  <a href="#" onclick="openModal(); toggleMenu(); return false;" style="font-size:22px;color:var(--dark);padding:20px 24px;border-bottom:1px solid var(--border);font-family:'Playfair Display',serif;text-decoration:none;display:block;">Clinician Portal</a>
-  <a href="/clinicianguide.html" style="font-size:22px;color:var(--dark);padding:20px 24px;border-bottom:1px solid var(--border);font-family:'Playfair Display',serif;text-decoration:none;display:block;">Clinician Guide</a>
-  <a href="#" style="font-size:22px;color:var(--dark);padding:20px 24px;font-family:'Playfair Display',serif;text-decoration:none;display:block;">Download</a>
-</div>
-</nav>
+
 
 <!-- HERO -->
 <section class="hero">
@@ -444,6 +476,29 @@ footer { background: #111E26; padding: 44px 52px; display: flex; align-items: ce
                 <path d="M0,22 C48,10 96,30 144,18 C180,8 210,24 228,18 L228,36 L0,36 Z" fill="rgba(122,184,200,0.15)"/>
               </svg>
             </div>
+            <!-- Mobile bottom nav -->
+<nav class="mobile-bottom-nav">
+  <a href="#how" class="mobile-nav-item">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+    <span>How it works</span>
+  </a>
+  <a href="#approach" class="mobile-nav-item">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+    <span>Approach</span>
+  </a>
+  <a href="#" class="mobile-nav-item mobile-nav-download">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+    <span>Download</span>
+  </a>
+  <a href="#free" class="mobile-nav-item">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="20 6 9 17 4 12"/></svg>
+    <span>Free</span>
+  </a>
+  <a href="#" onclick="openModal(); return false;" class="mobile-nav-item">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+    <span>Clinicians</span>
+  </a>
+</nav>
             <!-- body -->
            <div class="ps-body">
               <!-- widget row 1 -->
@@ -752,15 +807,6 @@ function switchTab(tab) {
   document.getElementById('modal-subtitle').textContent = tab === 'login'
     ? 'Sign in to access your clinician dashboard, or request access to get started.'
     : "Tell us a bit about yourself and we'll set you up within 48 hours.";
-}
-
-function toggleMenu() {
-  const menu = document.getElementById('mobileMenu');
-  const ham = document.getElementById('hamburger');
-  const isOpen = menu.style.display === 'flex';
-  menu.style.display = isOpen ? 'none' : 'flex';
-  ham.classList.toggle('open', !isOpen);
-  document.body.style.overflow = isOpen ? '' : 'hidden';
 }
 </script>
 </body>
