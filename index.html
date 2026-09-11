@@ -7,6 +7,7 @@
 <meta name="description" content="proof. is a free app for eating disorder recovery. Built on ERP, cognitive defusion, and interoceptive awareness. Used alongside treatment, never instead of it.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -717,7 +718,7 @@ position: fixed; top: 64px; right: 180px; left: auto;
         <label class="form-label">Password</label>
         <input class="form-input" type="password" id="login-password" placeholder="••••••••">
       </div>
-      <button class="form-btn" onclick="showLoginNotice()">Sign in →</button>
+        <button class="form-btn" id="login-submit-btn" onclick="signInClinician()">Sign in</button>
       <div class="form-status" id="login-status" style="font-size:12px;text-align:center;min-height:16px;margin-top:2px;"></div>
       <div class="form-footer"><a href="#">Forgot password?</a></div>
     </div>
@@ -812,10 +813,40 @@ document.querySelectorAll('.nav-links a').forEach(link => {
 
 const FORM_ENDPOINT = "https://formspree.io/f/xnpqlybk";
 
-function showLoginNotice() {
+const SUPABASE_URL = 'https://sihdfuuzrjuuhymivrdg.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpaGRmdXV6cmp1dWh5bWl2cmRnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI1MjI1NDUsImV4cCI6MjA4ODA5ODU0NX0.W6_JGD3qPn9jwPhm3_8b11uZvD5tHA7sh832bixSDT8';
+const sbClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+async function signInClinician() {
+  const email = document.getElementById('login-email').value.trim();
+  const password = document.getElementById('login-password').value;
   const statusEl = document.getElementById('login-status');
-  statusEl.style.color = '#6A9AAA';
-  statusEl.textContent = "Clinician sign-in isn't live yet — please use Request access below.";
+  const btnEl = document.getElementById('login-submit-btn');
+
+  if (!email || !password) {
+    statusEl.style.color = '#C4705F';
+    statusEl.textContent = 'Please enter your email and password.';
+    return;
+  }
+
+  const originalText = btnEl.textContent;
+  btnEl.disabled = true;
+  btnEl.textContent = 'Signing in…';
+  statusEl.textContent = '';
+
+  const { error } = await sbClient.auth.signInWithPassword({ email, password });
+
+  if (error) {
+    statusEl.style.color = '#C4705F';
+    statusEl.textContent = 'Incorrect email or password.';
+    btnEl.disabled = false;
+    btnEl.textContent = originalText;
+    return;
+  }
+
+  statusEl.style.color = '#3D6B45';
+  statusEl.textContent = 'Signed in — redirecting…';
+  window.location.href = '/clinician.html';
 }
 
 async function submitRequestForm() {
