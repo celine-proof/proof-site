@@ -82,7 +82,7 @@ h1.hero-h1 em { font-style: italic; color: var(--terra); }
 .phone-wrap { position: relative; display: flex; justify-content: center; align-items: center; }
 .phone-glow { position: absolute; width: 220px; height: 220px; background: radial-gradient(circle, rgba(122,184,200,0.2) 0%, transparent 70%); bottom: -40px; left: 50%; transform: translateX(-50%); pointer-events: none; }
 .phone-shell {
-  width: 244px; height: 526px;
+  width: 244px; height: 574px;
   background: linear-gradient(160deg, #1a1a1a 0%, #0d0d0d 40%, #080808 100%);
   border-radius: 54px;
   padding: 10px;
@@ -144,6 +144,29 @@ h1.hero-h1 em { font-style: italic; color: var(--terra); }
 .ps-tab-active span { color: var(--terra); font-weight: 600; }
 .ps-home-bar { height: 18px; background: #fff; display: flex; align-items: center; justify-content: center; }
 .ps-home-bar::after { content: ''; width: 90px; height: 4px; background: var(--dark); border-radius: 3px; opacity: 0.15; }
+
+/* redesigned phone home screen */
+.ps-hero-wave { margin: 0 10px 8px; height: 68px; border-radius: 18px; overflow: hidden; background: var(--dark); position: relative; }
+.ps-tile { flex: 1; border-radius: 12px; padding: 10px; }
+.ps-tile-blue { background: #E6EFF3; }
+.ps-tile-sand { background: #EFD9A0; }
+.ps-tile-icon { width: 22px; height: 22px; border-radius: 7px; display: flex; align-items: center; justify-content: center; margin-bottom: 6px; }
+.ps-tile-title { font-size: 9.5px; font-weight: 700; margin-bottom: 2px; line-height: 1.2; }
+.ps-tile-sub { font-size: 7.5px; line-height: 1.3; }
+.ps-row-card { display: flex; align-items: center; gap: 9px; border-radius: 13px; padding: 9px 11px; margin-bottom: 6px; }
+.ps-row-dark { background: var(--dark); }
+.ps-row-teal { background: var(--terra); }
+.ps-row-light { background: #EFE9DC; border: 1px solid #DCD2B8; }
+.ps-row-icon { width: 24px; height: 24px; border-radius: 7px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: rgba(255,255,255,0.14); }
+.ps-row-light .ps-row-icon { background: rgba(58,122,154,0.12); }
+.ps-row-title { font-size: 10px; font-weight: 700; color: #fff; }
+.ps-row-sub { font-size: 7.5px; color: rgba(255,255,255,0.55); }
+.ps-row-title-dark { font-size: 10px; font-weight: 700; color: var(--dark); }
+.ps-row-sub-dark { font-size: 7.5px; color: var(--muted); }
+.ps-chevron { margin-left: auto; color: var(--muted); }
+.ps-tabbar { display: flex; justify-content: space-around; align-items: center; background: var(--dark); padding: 7px 0; }
+.ps-tabbar-item { width: 26px; height: 26px; border-radius: 7px; display: flex; align-items: center; justify-content: center; }
+.ps-tabbar-item.active { background: var(--terra); }
 /* ── STRIP ───────────────────────────────────────────────────── */
 .strip { background: var(--dark); padding: 26px 52px; display: flex; align-items: center; justify-content: center; gap: 52px; flex-wrap: wrap; }
 .strip-item { display: flex; align-items: center; gap: 9px; font-size: 12px; color: rgba(200,223,232,0.5); }
@@ -420,61 +443,46 @@ position: fixed; top: 64px; right: 180px; left: auto;
             </div>
         <!-- dynamic island -->
             <div class="ps-island" style="margin-top:2px;"></div>
-            <!-- header -->
+           <!-- header -->
             <div class="ps-header">
               <div>
                 <div class="ps-logo">proof<span>.</span></div>
-                <div class="ps-greeting">hi, Maya </div>
+                <div class="ps-greeting" style="font-style:italic;">Hi, Celine</div>
               </div>
               <div class="ps-settings-btn">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(122,184,200,0.6)" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
               </div>
             </div>
-            <!-- wave banner -->
-            <div class="ps-wave-banner">
-              <svg width="100%" height="36" viewBox="0 0 228 36" preserveAspectRatio="none">
-                <path d="M0,18 C38,6 76,28 114,16 C152,4 190,22 228,14 L228,36 L0,36 Z" fill="rgba(58,122,154,0.3)"/>
-                <path d="M0,22 C48,10 96,30 144,18 C180,8 210,24 228,18 L228,36 L0,36 Z" fill="rgba(122,184,200,0.15)"/>
+            <!-- big hero wave -->
+            <div class="ps-hero-wave">
+              <svg width="100%" height="100%" viewBox="0 0 228 68" preserveAspectRatio="none">
+                <path d="M0,30 C38,18 76,42 114,28 C152,14 190,34 228,24 L228,68 L0,68 Z" fill="rgba(58,122,154,0.35)"/>
+                <path d="M0,38 C48,24 96,46 144,32 C180,22 210,38 228,32 L228,68 L0,68 Z" fill="rgba(122,184,200,0.18)"/>
               </svg>
             </div>
             <!-- body -->
            <div class="ps-body">
-              <!-- widget row 1 -->
+              <!-- check-in tiles -->
               <div style="display:flex;gap:6px;margin-bottom:6px;">
-                <div style="flex:1;background:#fff;border-radius:12px;padding:10px;border:1px solid var(--border);">
-                  <div style="width:24px;height:24px;border-radius:7px;background:rgba(58,122,154,0.1);display:flex;align-items:center;justify-content:center;margin-bottom:6px;">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#3A7A9A" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                <div class="ps-tile ps-tile-blue">
+                  <div class="ps-tile-icon" style="background:rgba(58,122,154,0.15);">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#3A7A9A" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
                   </div>
-                  <div style="font-size:10px;font-weight:600;color:#1A2E38;margin-bottom:2px;">Meal check-in</div>
-                  <div style="font-size:8px;color:#6A9AAA;">Before, during, or after</div>
+                  <div class="ps-tile-title" style="color:#1A2E38;">Meal check-in</div>
+                  <div class="ps-tile-sub" style="color:#5A7880;">Before, during, or after</div>
                 </div>
-                <div style="flex:1;background:#E8D5A8;border-radius:12px;padding:10px;border:1px solid #C4A870;">
-                  <div style="font-size:16px;margin-bottom:6px;">🫀</div>
-                  <div style="font-size:10px;font-weight:600;color:#3A2A10;margin-bottom:2px;">Body check-in</div>
-                  <div style="font-size:8px;color:#8A6A30;">A quick pause</div>
-                </div>
-              </div>
-              <!-- widget row 2 -->
-              <div style="display:flex;gap:6px;margin-bottom:6px;">
-                <div style="flex:1;background:#1A2E38;border-radius:12px;padding:10px;">
-                  <div style="width:24px;height:24px;border-radius:7px;background:rgba(122,184,200,0.15);display:flex;align-items:center;justify-content:center;margin-bottom:6px;">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#7AB8C8" stroke-width="2"><path d="M2 12 C4 8 6 16 8 12 C10 8 12 16 14 12 C16 8 18 16 20 12"/></svg>
+                <div class="ps-tile ps-tile-sand">
+                  <div class="ps-tile-icon" style="background:rgba(0,0,0,0.08);">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#5A3F10" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
                   </div>
-                  <div style="font-size:10px;font-weight:600;color:#F7F4EE;margin-bottom:2px;">Coping skills</div>
-                  <div style="font-size:8px;color:rgba(200,223,232,0.5);">For hard moments</div>
-                </div>
-                <div style="flex:1;background:#F0E8D0;border-radius:12px;padding:10px;border:1px solid #E8D5A8;">
-                  <div style="width:24px;height:24px;border-radius:7px;background:rgba(58,122,154,0.1);display:flex;align-items:center;justify-content:center;margin-bottom:6px;">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#3A7A9A" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
-                  </div>
-                  <div style="font-size:10px;font-weight:600;color:#1A2E38;margin-bottom:2px;">Evidence journal</div>
-                  <div style="font-size:8px;color:#6A9AAA;">12 meals logged</div>
+                  <div class="ps-tile-title" style="color:#3A2A10;">Moment check-in</div>
+                  <div class="ps-tile-sub" style="color:#7A5A20;">A quick pause</div>
                 </div>
               </div>
               <!-- distress wave card -->
-              <div class="ps-card">
+              <div class="ps-card" style="margin-bottom:6px;">
                 <div class="ps-wave-label">Distress wave · Dinner</div>
-                <svg width="100%" height="40" viewBox="0 0 190 40">
+                <svg width="100%" height="36" viewBox="0 0 190 40">
                   <defs><linearGradient id="wg" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#7AB8C8" stop-opacity="0.3"/><stop offset="100%" stop-color="#3A7A9A" stop-opacity="0.1"/></linearGradient></defs>
                  <path d="M10,14 C30,12 50,8 80,10 C105,12 130,32 160,28 L160,40 L10,40 Z" fill="url(#wg)"/>
                   <path d="M10,14 C30,12 50,8 80,10 C105,12 130,32 160,28" fill="none" stroke="#3A7A9A" stroke-width="1.8" stroke-linecap="round"/>
@@ -490,6 +498,46 @@ position: fixed; top: 64px; right: 180px; left: auto;
                 </svg>
                 <div style="font-size:8px;color:#3D6B45;font-weight:600;margin-top:4px;">Wave complete</div>
               </div>
+              <!-- coping skills -->
+              <div class="ps-row-card ps-row-dark">
+                <div class="ps-row-icon">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#7AB8C8" stroke-width="2"><path d="M2 12 C4 8 6 16 8 12 C10 8 12 16 14 12 C16 8 18 16 20 12"/></svg>
+                </div>
+                <div>
+                  <div class="ps-row-title">Coping skills</div>
+                  <div class="ps-row-sub">For hard moments</div>
+                </div>
+              </div>
+              <!-- need support -->
+              <div class="ps-row-card ps-row-teal">
+                <div class="ps-row-icon">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                </div>
+                <div>
+                  <div class="ps-row-title">Need support?</div>
+                  <div class="ps-row-sub">Whys &amp; helplines</div>
+                </div>
+              </div>
+              <!-- keep building -->
+              <div class="ps-row-card ps-row-light">
+                <div class="ps-row-icon">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#3A7A9A" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+                </div>
+                <div>
+                  <div class="ps-row-title-dark">Keep building</div>
+                  <div class="ps-row-sub-dark">Journal, recipes, reminders</div>
+                </div>
+                <div class="ps-chevron">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </div>
+              </div>
+            </div>
+            <!-- tab bar -->
+            <div class="ps-tabbar">
+              <div class="ps-tabbar-item active"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div>
+              <div class="ps-tabbar-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
+              <div class="ps-tabbar-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"><path d="M2 12 C4 8 6 16 8 12 C10 8 12 16 14 12 C16 8 18 16 20 12"/></svg></div>
+              <div class="ps-tabbar-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 15l4-6 4 3 5-8"/></svg></div>
             </div>
           </div>
         </div>
